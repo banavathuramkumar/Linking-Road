@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "ClashDisplay";
+  src: url("./assets/fonts/ClashDisplay-Semibold.ttf");
+}
+
+body {
+  font-family: sans-serif;
+}
