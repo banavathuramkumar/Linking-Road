@@ -68,7 +68,7 @@ const SignUp = () => {
     if (step < 5) {
       setStep(step + 1);
     } else {
-      navigate("/home");
+      navigate("/");
     }
   };
 
@@ -81,7 +81,7 @@ const SignUp = () => {
   return (
     <div className="min-h-screen bg-[#F6F1FF]">
       {/* HEADER */}
-      <div className="h-24 bg-white border-b border-[#E2E8F0] px-8 flex items-center justify-between">
+      <div className="min-h-[96px] bg-white border-b border-[#E2E8F0] px-5 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
         <img src="/logo.png" alt="logo" className="h-10 object-contain" />
 
         <p className="text-[#64748B] text-[16px]">
@@ -93,9 +93,9 @@ const SignUp = () => {
       </div>
 
       {/* BODY */}
-      <div className="max-w-[900px] mx-auto px-6 py-12">
+      <div className="max-w-[950px] mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* STEPPER */}
-        <div className="flex justify-center mb-12 overflow-x-auto">
+        <div className="flex justify-start sm:justify-center mb-10 overflow-x-auto pb-2">
           <div className="flex items-start relative">
             {[
               "Create Account",
@@ -106,12 +106,12 @@ const SignUp = () => {
             ].map((item, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center relative w-[170px]"
+                className="flex flex-col items-center relative min-w-[120px] sm:min-w-[140px] md:min-w-[170px]"
               >
                 {/* CONNECTING LINE */}
                 {index !== 4 && (
                   <div
-                    className={`absolute top-[20px] left-[85px] w-[170px] h-[3px] ${
+                    className={`absolute top-[20px] left-1/2 translate-x-[22px] w-full h-[3px] ${
                       step > index + 1 ? "bg-[#5B21B6]" : "bg-[#E2E8F0]"
                     }`}
                   />
@@ -153,11 +153,11 @@ const SignUp = () => {
         <div className="bg-white rounded-[32px] border border-[#E2E8F0] overflow-hidden shadow-sm">
           {/* STEP 1 */}
           {step === 1 && (
-            <div className="p-8 md:p-14">
+            <div className="p-5 sm:p-8 md:p-14">
               <div className="text-center mb-10">
                 <h1
                   style={{ fontFamily: "ClashDisplay" }}
-                  className="text-[42px] leading-[48px] font-semibold tracking-[-1px] text-[#0F172B]"
+                  className="text-[28px] sm:text-[36px] md:text-[42px] leading-[48px] font-semibold tracking-[-1px] text-[#0F172B]"
                 >
                   Create your account
                 </h1>
@@ -245,11 +245,11 @@ const SignUp = () => {
 
           {/* STEP 2 */}
           {step === 2 && (
-            <div className="p-8 md:p-14">
+            <div className="p-5 sm:p-8 md:p-14">
               <div className="text-center mb-12">
                 <h1
                   style={{ fontFamily: "ClashDisplay" }}
-                  className="text-[42px] font-semibold text-[#0F172B]"
+                  className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold text-[#0F172B]"
                 >
                   How do you identify?
                 </h1>
@@ -259,7 +259,7 @@ const SignUp = () => {
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-5 max-w-[700px] mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[700px] mx-auto">
                 {[
                   {
                     title: "Creator",
@@ -299,7 +299,7 @@ const SignUp = () => {
                     <div className="flex items-start justify-between">
                       <div>
                         <div
-                          className={`w-14 h-14 rounded-2xl flex items-center justify-center text-[24px] mb-4 ${
+                          className={`w-14 h-14 rounded-2xl flex items-center justify-center text-[20px] sm:text-[24px] mb-4 ${
                             selectedBusiness === item.title
                               ? "bg-[#5B21B6] text-white"
                               : "bg-[#F1F5F9] text-[#475569]"
@@ -329,14 +329,14 @@ const SignUp = () => {
 
           {/* STEP 3 */}
           {step === 3 && (
-            <div className="p-8 md:p-14 text-center">
+            <div className="p-5 sm:p-8 md:p-14 text-center">
               <div className="w-24 h-24 rounded-[28px] bg-gradient-to-br from-[#F97316] via-[#EC4899] to-[#7C3AED] mx-auto flex items-center justify-center shadow-2xl mb-8">
                 <FaInstagram className="text-white text-[40px]" />
               </div>
 
               <h1
                 style={{ fontFamily: "ClashDisplay" }}
-                className="text-[42px] font-semibold text-[#0F172B]"
+                className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold text-[#0F172B]"
               >
                 Connect your Instagram
               </h1>
@@ -355,11 +355,11 @@ const SignUp = () => {
 
           {/* STEP 4 */}
           {step === 4 && (
-            <div className="p-8 md:p-14">
+            <div className="p-5 sm:p-8 md:p-14">
               <div className="text-center mb-12">
                 <h1
                   style={{ fontFamily: "ClashDisplay" }}
-                  className="text-[42px] font-semibold text-[#0F172B]"
+                  className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold text-[#0F172B]"
                 >
                   What&apos;s your main goal?
                 </h1>
@@ -400,7 +400,7 @@ const SignUp = () => {
                   <div
                     key={index}
                     onClick={() => setSelectedGoal(item.title)}
-                    className={`rounded-3xl border p-5 flex items-center gap-5 cursor-pointer transition-all duration-300 ${
+                    className={`rounded-3xl border p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center gap-5 cursor-pointer transition-all duration-300 ${
                       selectedGoal === item.title
                         ? "border-[#5B21B6] bg-[#F8F5FF] shadow-lg"
                         : "border-[#E2E8F0]"
@@ -436,11 +436,11 @@ const SignUp = () => {
           )}
           {/* STEP 5 */}
           {step === 5 && (
-            <div className="p-8 md:p-14">
+            <div className="p-5 sm:p-8 md:p-14">
               <div className="text-center mb-12">
                 <h1
                   style={{ fontFamily: "ClashDisplay" }}
-                  className="text-[42px] font-semibold text-[#0F172B]"
+                  className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold text-[#0F172B]"
                 >
                   Choose a template
                 </h1>
@@ -450,7 +450,7 @@ const SignUp = () => {
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-5 max-w-[760px] mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[760px] mx-auto">
                 {[
                   "DM to Email Capture",
                   "Story Reply to Sales Page",
@@ -470,7 +470,7 @@ const SignUp = () => {
                       Lead Gen
                     </div>
 
-                    <h2 className="text-[28px] leading-[36px] font-semibold text-[#0F172B]">
+                    <h2 className="text-[22px] sm:text-[26px] md:text-[28px] leading-[36px] font-semibold text-[#0F172B]">
                       {item}
                     </h2>
 
@@ -487,7 +487,7 @@ const SignUp = () => {
           )}
 
           {/* FOOTER */}
-          <div className="h-24 border-t border-[#E2E8F0] px-8 flex items-center justify-between">
+          <div className="min-h-[96px] border-t border-[#E2E8F0] px-5 sm:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
             {step > 1 ? (
               <button
                 onClick={prevStep}
@@ -502,7 +502,7 @@ const SignUp = () => {
 
             <button
               onClick={nextStep}
-              className="h-14 px-8 rounded-2xl bg-[#5B21B6] text-white text-[18px] font-medium shadow-[0px_12px_30px_rgba(91,33,182,0.35)] flex items-center gap-3 hover:scale-[1.02] transition-all duration-300"
+              className="w-full sm:w-auto h-14 px-8 rounded-2xl bg-[#5B21B6] text-white text-[18px] font-medium shadow-[0px_12px_30px_rgba(91,33,182,0.35)] flex items-center gap-3 hover:scale-[1.02] transition-all duration-300"
             >
               {step === 5 ? "Complete Setup" : "Continue"}
 
