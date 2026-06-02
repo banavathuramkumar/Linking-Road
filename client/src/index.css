@@ -4,6 +4,11 @@
   font-family: "ClashDisplay";
   src: url("./assets/fonts/ClashDisplay-Semibold.ttf");
 }
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/fonts/Inter_18pt-Bold.ttf");
+  font-weight: 700;
+}
 
 body {
   font-family: sans-serif;

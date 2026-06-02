@@ -9,7 +9,7 @@ const Hero = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="relative w-full top-20 min-h-screen flex flex-col items-center px-4 overflow-hidden pb-24">
+    <div className="relative w-full top-20 h-[900px] sm:h-[1100px] md:h-[1300px] lg:h-[1508px] flex flex-col items-center px-4 overflow-hidden pb-24">
       {/* TOP BADGE */}
       <div className="mt-10 sm:mt-14 h-[38px] px-5 rounded-full bg-white border border-[#E0E7FF] flex items-center justify-center shadow-[0px_4px_12px_rgba(76,34,158,0.08)]">
         <p className="text-[12px] sm:text-[14px] font-medium text-[#4C229E] whitespace-nowrap">
