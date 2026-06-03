@@ -29,6 +29,24 @@ const SignUp = () => {
   const [selectedBusiness, setSelectedBusiness] = useState("");
   const [selectedGoal, setSelectedGoal] = useState("");
   const [selectedTemplate, setSelectedTemplate] = useState("");
+  const [passwordStrength, setPasswordStrength] = useState("");
+
+  const checkPasswordStrength = (password) => {
+    const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/;
+    if (!password) {
+      setPasswordStrength("");
+      return;
+    }
+    if (password.length < 6) {
+      setPasswordStrength("Weak password");
+      return;
+    }
+    if (password.length >= 8 && strongPassword.test(password)) {
+      setPasswordStrength("Strong password");
+    } else {
+      setPasswordStrength("Medium password");
+    }
+  };
 
   const nextStep = () => {
     // STEP 1 VALIDATION
@@ -226,6 +244,8 @@ const SignUp = () => {
                 </div>
 
                 {/* PASSWORD */}
+
+                {/* PASSWORD */}
                 <div className="flex flex-col gap-3">
                   <label className="text-[15px] font-medium text-[#0F172B]">
                     Password
@@ -238,9 +258,25 @@ const SignUp = () => {
                       id="password"
                       type="password"
                       placeholder="••••••••"
+                      onChange={(e) => checkPasswordStrength(e.target.value)}
                       className="bg-transparent outline-none w-full text-[15px]"
                     />
                   </div>
+
+                  {/* PASSWORD STRENGTH MESSAGE */}
+                  {passwordStrength && (
+                    <p
+                      className={`text-[13px] font-medium px-1 ${
+                        passwordStrength === "Strong password"
+                          ? "text-[#16A34A]"
+                          : passwordStrength === "Medium password"
+                            ? "text-[#D97706]"
+                            : "text-[#DC2626]"
+                      }`}
+                    >
+                      {passwordStrength}
+                    </p>
+                  )}
                 </div>
 
                 {/* CONFIRM PASSWORD */}

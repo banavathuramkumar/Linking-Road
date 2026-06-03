@@ -168,7 +168,15 @@ const SolutionsSection = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.3 }}
-                        className="mt-5 max-w-[340px] text-[15px] leading-[30px] text-[#94A3B8]"
+                        className="
+      mt-3 sm:mt-5
+      max-w-full sm:max-w-[340px]
+      text-[13px] sm:text-[15px]
+      leading-[22px] sm:leading-[30px]
+      text-[#94A3B8]
+      break-words
+      pr-1
+    "
                       >
                         {item.description}
                       </motion.p>
