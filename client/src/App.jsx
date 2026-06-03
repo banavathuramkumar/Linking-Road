@@ -7,11 +7,13 @@ import Features from "./pages/Features";
 import Solutions from "./pages/Solutions";
 import Pricing from "./pages/Pricing";
 import FAQs from "./pages/FAQs";
+import ScrollToTop from "./components/ScrollToTop";
 import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
     <div>
+      <ScrollToTop />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />

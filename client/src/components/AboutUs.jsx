@@ -19,7 +19,7 @@ const AboutUs = () => {
           <div className="mt-8">
             <h1
               style={{ fontFamily: "ClashDisplay" }}
-              className="text-[20px] sm:text-[32px] lg:text-[48px] leading-[1] tracking-[-2px] font-semibold text-[#071133]"
+              className="text-[18px] sm:text-[24px] lg:text-[36px] leading-[1] tracking-[0.5px] font-semibold text-[#071133]"
             >
               Building the future of
             </h1>
@@ -28,7 +28,7 @@ const AboutUs = () => {
             <div className="inline-block mt-4 rotate-[-2deg] bg-white rounded-[20px] sm:rounded-[24px] px-4 sm:px-5 py-2 shadow-[0px_20px_50px_rgba(0,0,0,0.12)]">
               <h1
                 style={{ fontFamily: "ClashDisplay" }}
-                className="text-[20px] sm:text-[32px] lg:text-[48px] font-semibold leading-none tracking-[-1px] bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent"
+                className="text-[18px] sm:text-[24px] lg:text-[36px] font-semibold leading-none tracking-[1px] bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent"
               >
                 social engagement.
               </h1>

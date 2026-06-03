@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { FiCheck } from "react-icons/fi";
 
 const PricingSection = () => {
@@ -68,30 +69,43 @@ const PricingSection = () => {
         {/* TOP SECTION */}
         <div className="flex flex-col items-center text-center">
           {/* HEADING */}
-          <h1
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
             style={{ fontFamily: "ClashDisplay" }}
             className="text-[36px] sm:text-[52px] lg:text-[64px] leading-[40px] sm:leading-[56px] lg:leading-[64px] tracking-[-1.5px] font-semibold text-[#0F172A]"
           >
             Scale Smarter With
-          </h1>
-
+          </motion.h1>
           {/* GRADIENT HEADING */}
-          <div className="mt-4 rotate-[-2deg] rounded-[22px] bg-white px-6 sm:px-8 py-2 shadow-[0px_4px_4px_0px_#00000025]">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 25 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            viewport={{ once: true }}
+            className="mt-4 rotate-[-2deg] rounded-[22px] bg-white px-6 sm:px-8 py-2 shadow-[0px_4px_4px_0px_#00000025]"
+          >
             <h1
               style={{ fontFamily: "ClashDisplay" }}
               className="text-[36px] sm:text-[52px] lg:text-[64px] leading-[40px] sm:leading-[56px] lg:leading-[64px] tracking-[-1.5px] font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent"
             >
               Flexible Pricing
             </h1>
-          </div>
+          </motion.div>
 
           {/* DESCRIPTION */}
-          <p
+          <motion.p
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            viewport={{ once: true }}
             style={{ fontFamily: "Inter" }}
             className="mt-8 max-w-[720px] text-[16px] sm:text-[18px] leading-[30px] text-[#64748B]"
           >
             Simple, transparent pricing that grows with you. No hidden fees.
-          </p>
+          </motion.p>
 
           {/* BILLING TOGGLE */}
           <div className="mt-12 flex items-center rounded-full border border-[#E2E8F0] bg-[#F8FAFC] p-1">

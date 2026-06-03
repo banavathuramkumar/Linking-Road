@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { FiStar } from "react-icons/fi";
 
 const CTASection = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative w-full overflow-hidden bg-[#4C229E] py-[110px] px-4 sm:px-6">
       {/* PINK BLUR */}
@@ -65,6 +68,7 @@ const CTASection = () => {
           text-[#4C229E] text-[18px] font-semibold
           shadow-[0px_10px_30px_rgba(255,255,255,0.18)]
           transition-all duration-300 hover:scale-[1.03]"
+          onClick={() => navigate("/signup")}
         >
           Start Automating Today
         </button>

@@ -93,15 +93,15 @@ const GrowthSection = () => {
               viewport={{ once: true }}
               style={{ fontFamily: "ClashDisplay" }}
               className="
-    text-center
-    text-[40px]
-    sm:text-[56px]
-    lg:text-[72px]
-    leading-[0.95]
-    tracking-[-2px]
-    font-semibold
-    text-[#0F172A]
-    "
+                text-center
+                text-[40px]
+                sm:text-[56px]
+                lg:text-[72px]
+                leading-[0.95]
+                tracking-[-2px]
+                font-semibold
+                text-[#0F172A]
+                "
             >
               Everything you need to
             </motion.h2>

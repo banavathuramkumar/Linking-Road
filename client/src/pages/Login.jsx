@@ -5,8 +5,11 @@ import { HiOutlineMail } from "react-icons/hi";
 import { FiLock, FiMessageSquare, FiZap, FiUsers } from "react-icons/fi";
 import { HiArrowRight } from "react-icons/hi2";
 import { FiActivity } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="className=w-[1179px] h-[861px] opacity-100 flex">
       {/* LEFT SIDE */}
@@ -16,6 +19,7 @@ const Login = () => {
           src="/logo.png"
           alt="logo"
           className="h-10 w-auto absolute top-10 left-10"
+          onClick={() => navigate("/")}
         />
 
         {/* CENTER ICON */}

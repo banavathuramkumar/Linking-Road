@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { FiCheck, FiX } from "react-icons/fi";
 
 const ComparisonSection = () => {
+  const navigate = useNavigate();
   const comparisonData = [
     {
       feature: "Workflow Builder",
@@ -60,7 +62,7 @@ const ComparisonSection = () => {
         <div className="mt-8 flex flex-col items-center">
           <h1
             style={{ fontFamily: "ClashDisplay" }}
-            className="text-[34px] sm:text-[48px] lg:text-[64px] leading-none tracking-[-2px] font-semibold text-[#071133] text-center"
+            className="text-[34px] sm:text-[48px] lg:text-[64px] leading-none tracking-[-1px] font-semibold text-[#071133] text-center"
           >
             A platform that feels
           </h1>
@@ -69,7 +71,7 @@ const ComparisonSection = () => {
           <div className="mt-4 rotate-[-2deg] bg-white rounded-[18px] sm:rounded-[24px] px-4 sm:px-6 py-3 shadow-[0px_15px_40px_rgba(0,0,0,0.10)]">
             <h1
               style={{ fontFamily: "ClashDisplay" }}
-              className="text-[30px] sm:text-[42px] lg:text-[58px] leading-none tracking-[-2px] font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent text-center"
+              className="text-[30px] sm:text-[42px] lg:text-[58px] leading-none tracking-[-1px] font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent text-center"
             >
               designed, not assembled.
             </h1>
@@ -181,6 +183,7 @@ const ComparisonSection = () => {
             {/* CTA */}
             <div className="p-6 sm:p-8 flex items-center justify-center">
               <button
+              onClick={() => navigate("/signup")}
                 style={{ fontFamily: "GeneralSans" }}
                 className="h-[50px] sm:h-[56px] px-8 sm:px-10 rounded-2xl bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] text-white text-[15px] sm:text-[18px] font-semibold shadow-[0px_15px_40px_rgba(236,72,153,0.25)] hover:scale-[1.02] transition-all duration-300"
               >

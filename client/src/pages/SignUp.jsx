@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   FiUser,
@@ -37,38 +39,52 @@ const SignUp = () => {
       const confirmPassword = document.getElementById("confirmPassword").value;
 
       if (!name || !email || !password || !confirmPassword) {
-        alert("Please fill all fields");
+        toast.error("Please fill all fields");
+        return;
+      }
+
+      if (password.length < 8) {
+        toast.warning("Enter strong password");
+        return;
+      }
+
+      const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/;
+
+      if (!strongPassword.test(password)) {
+        toast.warning(
+          "Password must contain uppercase, lowercase, number & special character",
+        );
         return;
       }
 
       if (password !== confirmPassword) {
-        alert("Passwords do not match");
+        toast.error("Passwords do not match");
         return;
       }
     }
 
     // STEP 2 VALIDATION
     if (step === 2 && !selectedBusiness) {
-      alert("Please select a business type");
+      toast.info("Please select a business type");
       return;
     }
 
     // STEP 4 VALIDATION
     if (step === 4 && !selectedGoal) {
-      alert("Please select a goal");
+      toast.info("Please select a goal");
       return;
     }
 
     // STEP 5 VALIDATION
     if (step === 5 && !selectedTemplate) {
-      alert("Please select a template");
+      toast.info("Please select a template");
       return;
     }
 
     if (step < 5) {
       setStep(step + 1);
     } else {
-      navigate("/");
+      navigate("/dashboard");
     }
   };
 
@@ -82,7 +98,12 @@ const SignUp = () => {
     <div className="min-h-screen bg-[#F6F1FF]">
       {/* HEADER */}
       <div className="min-h-[96px] bg-white border-b border-[#E2E8F0] px-5 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <img src="/logo.png" alt="logo" className="h-10 object-contain" />
+        <img
+          onClick={() => navigate("/")}
+          src="/logo.png"
+          alt="logo"
+          className="h-10 object-contain"
+        />
 
         <p className="text-[#64748B] text-[16px]">
           Already have an account?{" "}
@@ -242,7 +263,6 @@ const SignUp = () => {
               </div>
             </div>
           )}
-
           {/* STEP 2 */}
           {step === 2 && (
             <div className="p-5 sm:p-8 md:p-14">
@@ -326,7 +346,6 @@ const SignUp = () => {
               </div>
             </div>
           )}
-
           {/* STEP 3 */}
           {step === 3 && (
             <div className="p-5 sm:p-8 md:p-14 text-center">
@@ -352,7 +371,6 @@ const SignUp = () => {
               </button>
             </div>
           )}
-
           {/* STEP 4 */}
           {step === 4 && (
             <div className="p-5 sm:p-8 md:p-14">
@@ -450,31 +468,124 @@ const SignUp = () => {
                 </p>
               </div>
 
+              {/* DYNAMIC TEMPLATES */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[760px] mx-auto">
-                {[
-                  "DM to Email Capture",
-                  "Story Reply to Sales Page",
-                  "Keyword to Course Access",
-                  "Comment to Giveaway Entry",
-                ].map((item, index) => (
+                {(selectedGoal === "Lead Generation"
+                  ? [
+                      {
+                        category: "Lead Gen",
+                        title: "DM to Email Capture",
+                      },
+                      {
+                        category: "Lead Gen",
+                        title: "Comment to Giveaway Entry",
+                      },
+                      {
+                        category: "Lead Gen",
+                        title: "Story Reply to Lead Form",
+                      },
+                      {
+                        category: "Lead Gen",
+                        title: "Instagram Quiz Funnel",
+                      },
+                    ]
+                  : selectedGoal === "Sales Automation"
+                    ? [
+                        {
+                          category: "Sales",
+                          title: "Story Reply to Sales Page",
+                        },
+                        {
+                          category: "Sales",
+                          title: "DM Product Recommendation",
+                        },
+                        {
+                          category: "Sales",
+                          title: "Abandoned Cart Recovery",
+                        },
+                        {
+                          category: "Sales",
+                          title: "Flash Sale Automation",
+                        },
+                      ]
+                    : selectedGoal === "Audience Engagement"
+                      ? [
+                          {
+                            category: "Engagement",
+                            title: "Auto Reply to Comments",
+                          },
+                          {
+                            category: "Engagement",
+                            title: "Reels Engagement Funnel",
+                          },
+                          {
+                            category: "Engagement",
+                            title: "Instagram Poll Automation",
+                          },
+                          {
+                            category: "Engagement",
+                            title: "Follower Welcome Sequence",
+                          },
+                        ]
+                      : selectedGoal === "Webinar Funnel"
+                        ? [
+                            {
+                              category: "Webinar",
+                              title: "Keyword to Webinar Registration",
+                            },
+                            {
+                              category: "Webinar",
+                              title: "DM Webinar Reminder",
+                            },
+                            {
+                              category: "Webinar",
+                              title: "Live Event Funnel",
+                            },
+                            {
+                              category: "Webinar",
+                              title: "Workshop Access Delivery",
+                            },
+                          ]
+                        : [
+                            {
+                              category: "Support",
+                              title: "FAQ Auto Replies",
+                            },
+                            {
+                              category: "Support",
+                              title: "Order Tracking Automation",
+                            },
+                            {
+                              category: "Support",
+                              title: "Customer Support Inbox",
+                            },
+                            {
+                              category: "Support",
+                              title: "DM Help Desk Flow",
+                            },
+                          ]
+                ).map((item, index) => (
                   <div
                     key={index}
-                    onClick={() => setSelectedTemplate(item)}
+                    onClick={() => setSelectedTemplate(item.title)}
                     className={`rounded-3xl border p-6 min-h-[180px] cursor-pointer transition-all duration-300 ${
-                      selectedTemplate === item
+                      selectedTemplate === item.title
                         ? "border-[#5B21B6] shadow-lg bg-[#F8F5FF]"
                         : "border-[#E2E8F0]"
                     }`}
                   >
+                    {/* CATEGORY */}
                     <div className="inline-flex px-4 py-2 rounded-full bg-[#EEF2FF] text-[#4F46E5] text-[13px] font-semibold mb-6">
-                      Lead Gen
+                      {item.category}
                     </div>
 
+                    {/* TITLE */}
                     <h2 className="text-[22px] sm:text-[26px] md:text-[28px] leading-[36px] font-semibold text-[#0F172B]">
-                      {item}
+                      {item.title}
                     </h2>
 
-                    {selectedTemplate === item && (
+                    {/* SELECTED */}
+                    {selectedTemplate === item.title && (
                       <p className="text-[#4F46E5] mt-6 font-medium flex items-center gap-2">
                         Selected
                         <FiCheck />
@@ -485,7 +596,6 @@ const SignUp = () => {
               </div>
             </div>
           )}
-
           {/* FOOTER */}
           <div className="min-h-[96px] border-t border-[#E2E8F0] px-5 sm:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
             {step > 1 ? (
@@ -511,6 +621,15 @@ const SignUp = () => {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

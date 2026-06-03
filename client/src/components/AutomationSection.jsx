@@ -49,7 +49,7 @@ const AutomationSection = () => {
         <div className="flex flex-col items-center">
           <h1
             style={{ fontFamily: "ClashDisplay" }}
-            className="text-[36px] sm:text-[52px] lg:text-[72px] leading-none tracking-[-2px] font-semibold text-[#071133] text-center"
+            className="text-[36px] sm:text-[52px] lg:text-[72px] leading-none tracking-[-1px] font-semibold text-[#071133] text-center"
           >
             Automate Every
           </h1>
@@ -58,7 +58,7 @@ const AutomationSection = () => {
           <div className="mt-4 rotate-[-2deg] bg-white rounded-[20px] px-5 sm:px-8 py-3 shadow-[0px_15px_40px_rgba(0,0,0,0.10)]">
             <h1
               style={{ fontFamily: "ClashDisplay" }}
-              className="text-[34px] sm:text-[48px] lg:text-[64px] leading-none tracking-[-2px] font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent"
+              className="text-[34px] sm:text-[48px] lg:text-[64px] leading-none tracking-[-1px] font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent"
             >
               Interaction
             </h1>
