@@ -21,7 +21,7 @@ const Sidebar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
     { name: "Dashboard", icon: HiOutlineViewGrid, path: "/" },
     { name: "Automations", icon: HiOutlineLightningBolt, path: "/automations" },
     { name: "Inbox", icon: HiOutlineMail },
-    { name: "Leads", icon: HiOutlineUserGroup },
+    { name: "Leads", icon: HiOutlineUserGroup, path: "/leads" },
     { name: "Analytics", icon: HiOutlineChartPie },
     { name: "Templates", icon: HiOutlineTemplate, path: "/templates" },
     { name: "Referrals", icon: HiOutlineGift },

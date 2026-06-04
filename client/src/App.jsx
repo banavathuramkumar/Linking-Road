@@ -8,6 +8,7 @@ import Solutions from "./pages/Solutions";
 import Pricing from "./pages/Pricing";
 import FAQs from "./pages/FAQs";
 import Automations from "./pages/Automations";
+import Leads from "./pages/Leads";
 import WorkflowBuilder from "./pages/WorkflowBuilder";
 import Templates from "./pages/Templates";
 import ScrollToTop from "./components/ScrollToTop";
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/pricing" element={<Pricing/>} />
         <Route path="/faqs" element={<FAQs/>} />
         <Route path="/automations" element={<Automations />} />
+        <Route path="/leads" element={<Leads />} />
         <Route path="/automations/builder" element={<WorkflowBuilder />} />
         <Route path="/templates" element={<Templates />} />
       </Routes>
