@@ -18,15 +18,15 @@ const Sidebar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
   const location = useLocation();
 
   const sidebarLinks = [
-    { name: "Dashboard", icon: HiOutlineViewGrid, path: "/" },
+    { name: "Dashboard", icon: HiOutlineViewGrid, path: "/dashboard" },
     { name: "Automations", icon: HiOutlineLightningBolt, path: "/automations" },
     { name: "Inbox", icon: HiOutlineMail },
     { name: "Leads", icon: HiOutlineUserGroup, path: "/leads" },
     { name: "Analytics", icon: HiOutlineChartPie },
     { name: "Templates", icon: HiOutlineTemplate, path: "/templates" },
-    { name: "Referrals", icon: HiOutlineGift },
-    { name: "Billing", icon: HiOutlineCreditCard },
-    { name: "Settings", icon: HiOutlineCog }
+    { name: "Referrals", icon: HiOutlineGift, path: "/referrals" },
+    { name: "Billing", icon: HiOutlineCreditCard, path: "/billing" },
+    { name: "Settings", icon: HiOutlineCog, path: "/settings" }
   ];
 
   // Helper to determine if a link is active based on the current location
@@ -55,7 +55,7 @@ const Sidebar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
           {/* Logo / Header */}
           <div 
             className="h-[95px] flex items-center justify-center border-b border-[#E2E8F0] px-6 cursor-pointer" 
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/dashboard")}
           >
             <img src="/logo.png" alt="Linkroad logo" className="h-10 object-contain" />
           </div>
