@@ -7,6 +7,9 @@ import Features from "./pages/Features";
 import Solutions from "./pages/Solutions";
 import Pricing from "./pages/Pricing";
 import FAQs from "./pages/FAQs";
+import Automations from "./pages/Automations";
+import WorkflowBuilder from "./pages/WorkflowBuilder";
+import Templates from "./pages/Templates";
 import ScrollToTop from "./components/ScrollToTop";
 import { Routes, Route } from "react-router-dom";
 
@@ -22,6 +25,9 @@ const App = () => {
         <Route path="/solutions" element={<Solutions/>} />
         <Route path="/pricing" element={<Pricing/>} />
         <Route path="/faqs" element={<FAQs/>} />
+        <Route path="/automations" element={<Automations />} />
+        <Route path="/automations/builder" element={<WorkflowBuilder />} />
+        <Route path="/templates" element={<Templates />} />
       </Routes>
     </div>
   );
