@@ -9,6 +9,11 @@ import Pricing from "./pages/Pricing";
 import FAQs from "./pages/FAQs";
 import ScrollToTop from "./components/ScrollToTop";
 import { Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import Referrals from "./pages/Referrals";
+import Billing from "./pages/Billing";
+import Settings from "./pages/Settings";
+import Notifications from "./pages/Notifications";
 
 const App = () => {
   return (
@@ -22,6 +27,11 @@ const App = () => {
         <Route path="/solutions" element={<Solutions/>} />
         <Route path="/pricing" element={<Pricing/>} />
         <Route path="/faqs" element={<FAQs/>} />
+        <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/referrals" element={<Referrals/>} />
+        <Route path="/billing" element={<Billing/>} />
+        <Route path="/settings" element={<Settings/>} />
+        <Route path="/notifications" element={<Notifications/>} />
       </Routes>
     </div>
   );
