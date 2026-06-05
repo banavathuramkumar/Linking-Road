@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 import {
@@ -44,6 +45,8 @@ const cardHover = {
 };
 
 const AutomationSection = () => {
+  const navigate = useNavigate();
+
   const automationFeatures = [
     {
       title: "Comment AutoDM",
@@ -231,7 +234,8 @@ const AutomationSection = () => {
                 key={index}
                 variants={fadeUp}
                 whileHover={cardHover.whileHover}
-                className="w-full min-h-[90px] rounded-[16px] border border-[#E2E8F0] border-t border-t-black/10 px-4 py-4 flex items-start gap-4 bg-white/50 backdrop-blur-[20px] transition-all duration-300"
+                onClick={() => navigate("/signup")}
+                className="w-full min-h-[90px] rounded-[16px] border border-[#E2E8F0] border-t border-t-black/10 px-4 py-4 flex items-start gap-4 bg-white/50 backdrop-blur-[20px] transition-all duration-300 cursor-pointer"
               >
                 {/* ICON */}
                 <motion.div
@@ -243,7 +247,6 @@ const AutomationSection = () => {
 
                 {/* CONTENT */}
                 <div>
-                  {/* TITLE */}
                   <h1
                     style={{ fontFamily: "ClashDisplay" }}
                     className="text-[18px] leading-[28px] font-semibold text-[#0F172B]"
@@ -251,7 +254,6 @@ const AutomationSection = () => {
                     {item.title}
                   </h1>
 
-                  {/* DESCRIPTION */}
                   <p
                     style={{ fontFamily: "Inter" }}
                     className="mt-1 text-[15px] sm:text-[16px] leading-[24px] text-[#62748E]"

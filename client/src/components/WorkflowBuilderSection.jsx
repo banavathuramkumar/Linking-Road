@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FiZap, FiClock, FiDatabase, FiMessageCircle } from "react-icons/fi";
+import WorkflowAnimation from "./WorkflowAnimation";
 
 const headingFade = {
   hidden: { opacity: 0, y: -30 },
@@ -84,13 +85,13 @@ const WorkflowBuilderSection = () => {
 
         {/* WORKFLOW CONTAINER – deliberately left empty */}
         <motion.div
-          className="relative mt-16 w-full max-w-[1131px] h-[400px] md:h-[500px] lg:h-[600px] rounded-[24px] border border-white/10 border-t border-t-[#31415880] bg-[#1E293BCC] shadow-[0px_25px_50px_-12px_#00000040,0px_0px_0px_1px_#FFFFFF1A] overflow-hidden backdrop-blur-[40px]"
+          className="relative mt-16 w-full max-w-[1131px] h-[365px] md:h-[465px] lg:h-[565px] rounded-[24px] border border-white/10 border-t border-t-[#31415880] bg-[#1E293BCC] shadow-[0px_25px_50px_-12px_#00000040,0px_0px_0px_1px_#FFFFFF1A] overflow-hidden backdrop-blur-[40px]"
           variants={containerStagger}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {/* No inner content – placeholder for the visual canvas */}
+           <WorkflowAnimation />
         </motion.div>
       </div>
     </section>
