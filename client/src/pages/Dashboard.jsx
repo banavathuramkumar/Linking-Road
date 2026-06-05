@@ -158,7 +158,7 @@ const Dashboard = () => {
 
   return (
     <div 
-      className="flex min-h-screen bg-[#FAF9FF] text-slate-800 antialiased selection:bg-indigo-100 selection:text-indigo-900"
+      className="flex min-h-screen bg-[#FAF9FF] dark:bg-[#090D16] text-slate-800 dark:text-slate-100 antialiased selection:bg-indigo-100 selection:text-indigo-900"
       style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
     >
       {/* Sidebar Component */}
@@ -172,15 +172,15 @@ const Dashboard = () => {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="lg:hidden p-3 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 transition-all shadow-sm active:scale-95"
+              className="lg:hidden p-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0F172A] hover:bg-slate-50 dark:hover:bg-[#1E293B] transition-all shadow-sm active:scale-95"
             >
-              <HiMenu className="w-6 h-6 text-slate-700" />
+              <HiMenu className="w-6 h-6 text-slate-700 dark:text-slate-300" />
             </button>
             <div>
-              <h1 className="font-bold text-3xl sm:text-4xl text-slate-900 tracking-tight font-['ClashDisplay']">
+              <h1 className="font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white tracking-tight font-['ClashDisplay']">
                 Dashboard Overview
               </h1>
-              <p className="text-slate-400 text-xs sm:text-sm mt-1 font-medium">
+              <p className="text-slate-400 dark:text-slate-500 text-xs sm:text-sm mt-1 font-medium">
                 Welcome back! Here's your workspace performance statistics today.
               </p>
             </div>
@@ -194,10 +194,10 @@ const Dashboard = () => {
             return (
               <div
                 key={idx}
-                className={`group bg-white border border-slate-100/90 rounded-2xl p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden ${stat.glowColor}`}
+                className={`group bg-white dark:bg-[#0F172A] border border-slate-100/90 dark:border-slate-800/80 rounded-2xl p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden ${stat.glowColor}`}
               >
                 {/* Background Decor */}
-                <div className="absolute -right-4 -bottom-4 w-24 h-24 rounded-full bg-slate-50/40 group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute -right-4 -bottom-4 w-24 h-24 rounded-full bg-slate-50/40 dark:bg-slate-850/10 group-hover:scale-110 transition-transform duration-500" />
 
                 {/* Top Right Trend */}
                 <div className="absolute top-6 right-6 flex items-center gap-1">
@@ -217,7 +217,7 @@ const Dashboard = () => {
 
                 {/* Values */}
                 <div className="relative z-10">
-                  <h3 className="text-3xl font-bold text-slate-900 leading-none tracking-tight">
+                  <h3 className="text-3xl font-bold text-slate-900 dark:text-white leading-none tracking-tight">
                     {stat.value}
                   </h3>
                   <span className="text-xs font-semibold text-slate-400 mt-2 block uppercase tracking-wider">
@@ -232,10 +232,10 @@ const Dashboard = () => {
         {/* Middle Section: Chart + Side Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
           {/* Performance Overview Chart Card */}
-          <div className="lg:col-span-2 bg-white border border-slate-100 rounded-3xl p-6 sm:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] flex flex-col justify-between">
+          <div className="lg:col-span-2 bg-white dark:bg-[#0F172A] border border-slate-100 dark:border-slate-800/80 rounded-3xl p-6 sm:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-2">
-                <h2 className="text-xl font-bold text-slate-900 font-['ClashDisplay']">
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white font-['ClashDisplay']">
                   Performance Overview
                 </h2>
                 <span className="text-[11px] font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full uppercase tracking-wider">
@@ -248,7 +248,7 @@ const Dashboard = () => {
             </div>
 
             {/* SVG Chart Wrapper */}
-            <div className="w-full relative h-[250px] overflow-hidden rounded-2xl bg-slate-50/50 p-2 sm:p-4 border border-slate-50">
+            <div className="w-full relative h-[250px] overflow-hidden rounded-2xl bg-slate-50/50 dark:bg-slate-950/20 p-2 sm:p-4 border border-slate-50 dark:border-slate-800/80">
               <svg className="w-full h-full" viewBox={`0 0 ${chartWidth} ${chartHeight}`} preserveAspectRatio="none">
                 <defs>
                   <linearGradient id="purpleArea" x1="0" y1="0" x2="0" y2="1">
@@ -332,7 +332,7 @@ const Dashboard = () => {
           {/* Right Cards Stack */}
           <div className="flex flex-col gap-6">
             {/* Queue Status */}
-            <div className="bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] flex-1 flex flex-col justify-between">
+            <div className="bg-white dark:bg-[#0F172A] border border-slate-100 dark:border-slate-800/80 rounded-3xl p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] flex-1 flex flex-col justify-between">
               <div>
                 <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-5">
                   Queue Activity Status
@@ -341,8 +341,8 @@ const Dashboard = () => {
                 {/* Processing DMs */}
                 <div className="mb-5">
                   <div className="flex justify-between items-center text-xs font-bold mb-2">
-                    <span className="text-slate-600">Processing DMs</span>
-                    <span className="text-slate-950">845 / 1,000</span>
+                    <span className="text-slate-600 dark:text-slate-400">Processing DMs</span>
+                    <span className="text-slate-950 dark:text-slate-200">845 / 1,000</span>
                   </div>
                   <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
                     <div className="h-full bg-indigo-600 rounded-full" style={{ width: "84.5%" }} />
@@ -352,8 +352,8 @@ const Dashboard = () => {
                 {/* API Rate Limit */}
                 <div className="mb-6">
                   <div className="flex justify-between items-center text-xs font-bold mb-2">
-                    <span className="text-slate-600">API Rate Limit Usage</span>
-                    <span className="text-slate-950">12%</span>
+                    <span className="text-slate-600 dark:text-slate-400">API Rate Limit Usage</span>
+                    <span className="text-slate-950 dark:text-slate-200">12%</span>
                   </div>
                   <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
                     <div className="h-full bg-emerald-500 rounded-full" style={{ width: "12%" }} />
@@ -364,7 +364,7 @@ const Dashboard = () => {
               {/* Slow Down Switch */}
               <div className="flex items-center justify-between border-t border-slate-100 pt-4 mt-2">
                 <div>
-                  <h4 className="text-xs font-bold text-slate-800">Slow Down Mode</h4>
+                  <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200">Slow Down Mode</h4>
                   <p className="text-[10px] text-slate-400 mt-0.5">Limits automation dispatch speed</p>
                 </div>
                 <button
@@ -407,10 +407,10 @@ const Dashboard = () => {
         </div>
 
         {/* Recent Automations */}
-        <div className="bg-white border border-slate-100 rounded-3xl p-6 sm:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)]">
+        <div className="bg-white dark:bg-[#0F172A] border border-slate-100 dark:border-slate-800/80 rounded-3xl p-6 sm:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)]">
           <div className="flex justify-between items-center mb-6">
             <div>
-              <h2 className="text-xl font-bold text-slate-900 font-['ClashDisplay']">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white font-['ClashDisplay']">
                 Recent Active Automations
               </h2>
               <p className="text-slate-400 text-xs sm:text-sm mt-1 font-medium">
@@ -426,10 +426,10 @@ const Dashboard = () => {
           </div>
 
           {/* Table Container */}
-          <div className="overflow-x-auto w-full border border-slate-100 rounded-2xl bg-white shadow-sm">
+          <div className="overflow-x-auto w-full border border-slate-100 dark:border-slate-800/85 rounded-2xl bg-white dark:bg-[#0F172A] shadow-sm">
             <table className="w-full text-left border-collapse min-w-[600px]">
               <thead>
-                <tr className="border-b border-slate-100 bg-slate-50/50 text-slate-400 text-xs font-bold uppercase tracking-wider">
+                <tr className="border-b border-slate-100 dark:border-slate-800/85 bg-slate-50/50 dark:bg-slate-950/20 text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-wider">
                   <th className="py-4 px-6 font-semibold">Name</th>
                   <th className="py-4 px-6 font-semibold">Status</th>
                   <th className="py-4 px-6 font-semibold">Triggers</th>
@@ -439,9 +439,9 @@ const Dashboard = () => {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {automations.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-slate-50/30 transition-colors group">
+                  <tr key={idx} className="hover:bg-slate-50/30 dark:hover:bg-[#1E293B]/30 border-b border-slate-100/50 dark:border-slate-800/50 transition-colors group">
                     {/* Name */}
-                    <td className="py-4 px-6 font-bold text-slate-800 text-sm group-hover:text-indigo-600 transition-colors">
+                    <td className="py-4 px-6 font-bold text-slate-800 dark:text-slate-200 text-sm group-hover:text-indigo-600 transition-colors">
                       {row.name}
                     </td>
 

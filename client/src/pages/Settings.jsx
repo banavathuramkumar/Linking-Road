@@ -6,7 +6,7 @@ const Settings = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-[#F8FAFC]">
+    <div className="flex min-h-screen bg-[#F8FAFC] dark:bg-[#090D16]">
       <div className="flex-1">
         <SettingsHeader setMobileMenuOpen={setMobileMenuOpen} />
         <SettingsSidebar

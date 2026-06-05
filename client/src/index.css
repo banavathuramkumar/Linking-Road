@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @font-face {
   font-family: "ClashDisplay";
   src: url("./assets/fonts/ClashDisplay-Semibold.ttf");
@@ -12,4 +14,12 @@
 
 body {
   font-family: sans-serif;
+  background-color: #F8FAFC;
+  color: #0F172A;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark body {
+  background-color: #090D16;
+  color: #ffffff;
 }
