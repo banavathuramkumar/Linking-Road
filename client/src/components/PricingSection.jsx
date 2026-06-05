@@ -2,21 +2,35 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FiCheck } from "react-icons/fi";
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const fadeDown = {
+  hidden: { opacity: 0, y: -20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+};
+
+const buttonHover = {
+  whileHover: { scale: 1.02, boxShadow: "0px 15px 35px rgba(0,0,0,0.1)" },
+  transition: { type: "spring", stiffness: 300 },
+};
+
 const PricingSection = () => {
   const [billing, setBilling] = useState("yearly");
-
   const [selectedPlan, setSelectedPlan] = useState("Pro");
-
   const plans = [
     {
       name: "Starter",
-
       monthlyPrice: 49,
-
       yearlyPrice: 39,
-
       desc: "Perfect for creators just starting out.",
-
       features: [
         "1,000 Automations/mo",
         "Instagram AutoDM",
@@ -24,16 +38,11 @@ const PricingSection = () => {
         "Standard Support",
       ],
     },
-
     {
       name: "Pro",
-
       monthlyPrice: 99,
-
       yearlyPrice: 79,
-
       desc: "For growing brands and serious creators.",
-
       features: [
         "10,000 Automations/mo",
         "All Social Channels",
@@ -42,16 +51,11 @@ const PricingSection = () => {
         "CRM Integrations",
       ],
     },
-
     {
       name: "Enterprise",
-
       monthlyPrice: 299,
-
       yearlyPrice: 249,
-
       desc: "For large teams and agencies.",
-
       features: [
         "Unlimited Automations",
         "Custom Workflows",
@@ -108,9 +112,16 @@ const PricingSection = () => {
           </motion.p>
 
           {/* BILLING TOGGLE */}
-          <div className="mt-12 flex items-center rounded-full border border-[#E2E8F0] bg-[#F8FAFC] p-1">
+          <motion.div
+            className="mt-12 flex items-center rounded-full border border-[#E2E8F0] bg-[#F8FAFC] p-1"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {/* MONTHLY */}
-            <button
+            <motion.button
+              whileHover={buttonHover.whileHover}
               onClick={() => setBilling("monthly")}
               style={{ fontFamily: "Inter" }}
               className={`h-[48px] px-7 rounded-full text-[15px] font-semibold transition-all duration-300 cursor-pointer ${
@@ -120,10 +131,11 @@ const PricingSection = () => {
               }`}
             >
               Monthly
-            </button>
+            </motion.button>
 
             {/* YEARLY */}
-            <button
+            <motion.button
+              whileHover={buttonHover.whileHover}
               onClick={() => setBilling("yearly")}
               style={{ fontFamily: "Inter" }}
               className={`h-[48px] px-5 rounded-full text-[15px] font-semibold transition-all duration-300 flex items-center gap-2 cursor-pointer ${
@@ -133,26 +145,30 @@ const PricingSection = () => {
               }`}
             >
               <span>Yearly</span>
-
               <span className="px-2 py-1 rounded-full bg-[#DCFCE7] text-[#16A34A] text-[10px] font-bold">
                 SAVE 20%
               </span>
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         </div>
 
         {/* PRICING CARDS */}
-        <div className="mt-20 grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+        <motion.div
+          className="mt-20 grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {plans.map((plan, index) => {
             const isSelected = selectedPlan === plan.name;
-
-            const price =
-              billing === "monthly" ? plan.monthlyPrice : plan.yearlyPrice;
-
+            const price = billing === "monthly" ? plan.monthlyPrice : plan.yearlyPrice;
             return (
-              <div
+              <motion.div
                 key={index}
                 onClick={() => setSelectedPlan(plan.name)}
+                variants={cardVariant}
+                whileHover={buttonHover.whileHover}
                 className={`relative cursor-pointer rounded-[24px] transition-all duration-300 flex flex-col ${
                   isSelected
                     ? "border-[1.5px] border-[#4C229E] bg-white shadow-[0px_20px_50px_rgba(76,34,158,0.12)]"
@@ -183,7 +199,6 @@ const PricingSection = () => {
                     >
                       {plan.name}
                     </h1>
-
                     {/* DESCRIPTION */}
                     <p
                       style={{ fontFamily: "Inter" }}
@@ -201,7 +216,6 @@ const PricingSection = () => {
                     >
                       ${price}
                     </h1>
-
                     <span
                       style={{ fontFamily: "Inter" }}
                       className="mb-1 text-[16px] text-[#64748B]"
@@ -221,11 +235,7 @@ const PricingSection = () => {
                   {/* FEATURES */}
                   <div className="mt-10 flex flex-col gap-5">
                     {plan.features.map((feature, featureIndex) => (
-                      <div
-                        key={featureIndex}
-                        className="flex items-center gap-4"
-                      >
-                        {/* CHECK */}
+                      <div key={featureIndex} className="flex items-center gap-4">
                         <div className="w-5 h-5 flex items-center justify-center shrink-0">
                           <FiCheck
                             className={`text-[18px] ${
@@ -233,8 +243,6 @@ const PricingSection = () => {
                             }`}
                           />
                         </div>
-
-                        {/* FEATURE */}
                         <p
                           style={{ fontFamily: "Inter" }}
                           className="text-[15px] text-[#334155]"
@@ -247,7 +255,8 @@ const PricingSection = () => {
 
                   {/* BUTTON */}
                   <div className="mt-auto pt-10">
-                    <button
+                    <motion.button
+                      whileHover={buttonHover.whileHover}
                       style={{ fontFamily: "Inter" }}
                       className={`w-full h-[54px] rounded-full text-[17px] font-semibold transition-all duration-300 cursor-pointer ${
                         isSelected
@@ -256,13 +265,13 @@ const PricingSection = () => {
                       }`}
                     >
                       Get Started
-                    </button>
+                    </motion.button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

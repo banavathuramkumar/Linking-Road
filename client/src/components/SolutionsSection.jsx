@@ -9,6 +9,29 @@ import {
   FiZap,
 } from "react-icons/fi";
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const fadeDown = {
+  hidden: { opacity: 0, y: -20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const fadeZoom = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+};
+
+const containerStagger = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.2 },
+  },
+};
+
 const SolutionsSection = () => {
   const [activeTab, setActiveTab] = useState(0);
 
@@ -69,19 +92,27 @@ const SolutionsSection = () => {
   const activeSolution = solutions[activeTab];
 
   return (
-    <section className="w-full bg-[#FFFFFF] px-4 sm:px-6 lg:px-[80px] py-16 sm:py-20 overflow-hidden">
+    <motion.section
+      className="w-full bg-[#FFFFFF] px-4 sm:px-6 lg:px-[80px] py-16 sm:py-20 overflow-hidden"
+      initial="hidden"
+      animate="visible"
+      variants={containerStagger}
+    >
       {/* MAIN CONTAINER */}
-      <div className="max-w-[1120px] mx-auto">
+      <motion.div
+        className="max-w-[1120px] mx-auto"
+        variants={fadeUp}
+        transition={{ duration: 0.6 }}
+      >
         {/* TOP SECTION */}
         <div className="w-full max-w-[1131px] mx-auto flex flex-col items-center">
           {/* SMALL TOP BADGE */}
           <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="w-[202px] h-[38px] rounded-full border border-t border-[#FFFFFF] bg-[#0000000D] flex items-center justify-center"
->
+            variants={fadeDown}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="w-[202px] h-[38px] rounded-full border border-t border-[#FFFFFF] bg-[#0000000D] flex items-center justify-center"
+          >
             <p
               style={{ fontFamily: "Inter" }}
               className="text-[14px] leading-[20px] font-medium text-[#00000080] text-center"
@@ -93,11 +124,8 @@ const SolutionsSection = () => {
           {/* HEADING */}
           <div className="mt-6 flex flex-col items-center">
             {/* ONE PLATFORM */}
-           <motion.h1
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
+            <motion.h1
+              variants={fadeUp}
               style={{ fontFamily: "ClashDisplay" }}
               className="text-[34px] sm:text-[48px] lg:text-[60px] leading-[60px] tracking-[-1px] font-semibold text-black text-center"
             >
@@ -106,12 +134,11 @@ const SolutionsSection = () => {
 
             {/* ENDLESS SOLUTIONS BOX */}
             <motion.div
-                initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
-                whileInView={{ opacity: 1, scale: 1, rotate: -2.41 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2, }}
-               className="mt-4 rotate-[-2.41deg] w-auto min-h-[80px] px-6 sm:px-8 py-[10px] rounded-[22px] bg-white shadow-[0px_4px_4px_0px_#00000040] flex items-center justify-center"
->
+              variants={fadeZoom}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              whileHover={{ rotate: -1, scale: 1.02 }}
+              className="mt-4 rotate-[-2.41deg] w-auto min-h-[80px] px-6 sm:px-8 py-[10px] rounded-[22px] bg-white shadow-[0px_4px_4px_0px_#00000040] flex items-center justify-center"
+            >
               <h1
                 style={{ fontFamily: "ClashDisplay" }}
                 className="text-[34px] sm:text-[48px] lg:text-[60px] leading-[60px] tracking-[-1.5px] font-semibold bg-[linear-gradient(132.3deg,rgba(76,34,158,0.68)_12.83%,#F754B4_89.1%)] bg-clip-text text-transparent text-center"
@@ -122,10 +149,8 @@ const SolutionsSection = () => {
 
             {/* DESCRIPTION */}
             <motion.p
-               initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-               transition={{ duration: 0.8, delay: 0.4, }}
+              variants={fadeUp}
+              transition={{ duration: 0.8, delay: 0.4 }}
               style={{ fontFamily: "Inter" }}
               className="mt-8 max-w-[760px] text-center text-[16px] sm:text-[18px] leading-[28px] text-[#90A1B9] px-2"
             >
@@ -138,14 +163,21 @@ const SolutionsSection = () => {
 
         {/* MAIN CONTENT */}
         <div className="mt-16 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-          {/* LEFT SIDE */}
-          <div className="flex flex-col gap-5">
+          {/* LEFT SIDE – Tabs */}
+          <motion.div
+            variants={containerStagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="flex flex-col gap-5"
+          >
             {solutions.map((item, index) => (
               <motion.div
                 key={index}
                 onClick={() => setActiveTab(index)}
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.25 }}
+                whileHover={{ scale: 1.02, backgroundColor: "#f9fafb" }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 300 }}
                 className={`relative w-full max-w-[517px] rounded-[16px] transition-all duration-500 cursor-pointer overflow-hidden ${
                   activeTab === index
                     ? "h-[202px] border border-[#CBD5E1] bg-white/10 shadow-[0px_25px_50px_-12px_#615FFF1A]"
@@ -154,7 +186,11 @@ const SolutionsSection = () => {
               >
                 {/* ACTIVE LEFT INDICATOR */}
                 {activeTab === index && (
-                  <div className="absolute left-0 top-[48px] w-[4px] h-[70px] rounded-r-full bg-[#7C3AED]" />
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 70 }}
+                    className="absolute left-0 top-[48px] w-[4px] rounded-r-full bg-[#7C3AED]"
+                  />
                 )}
 
                 {/* CONTENT */}
@@ -167,7 +203,12 @@ const SolutionsSection = () => {
                   <div
                     className={`w-[48px] h-[48px] rounded-[14px] bg-gradient-to-r ${item.color} flex items-center justify-center shrink-0`}
                   >
-                    <div className="text-white text-[20px]">{item.icon}</div>
+                    <motion.div
+                      whileHover={{ rotate: 15, scale: 1.1 }}
+                      className="text-white text-[20px]"
+                    >
+                      {item.icon}
+                    </motion.div>
                   </div>
 
                   {/* TEXT */}
@@ -182,13 +223,13 @@ const SolutionsSection = () => {
                       {item.title}
                     </h1>
 
-                    {/* DESCRIPTION ONLY ACTIVE */}
+                    {/* DESCRIPTION – only for active */}
                     {activeTab === index && (
                       <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3 }}
-                        className=" mt-3 sm:mt-5 max-w-full sm:max-w-[340px] text-[13px] sm:text-[15px] leading-[22px] sm:leading-[30px] text-[#94A3B8] break-words pr-1 "
+                        className="mt-3 sm:mt-5 max-w-full sm:max-w-[340px] text-[13px] sm:text-[15px] leading-[22px] sm:leading-[30px] text-[#94A3B8] break-words pr-1"
                       >
                         {item.description}
                       </motion.p>
@@ -197,35 +238,43 @@ const SolutionsSection = () => {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          {/* RIGHT SIDE */}
+          {/* RIGHT SIDE – Dashboard preview */}
           <div className="w-full flex justify-center mt-10 lg:mt-0">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
+                initial={{ opacity: 0, scale: 0.96, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96, y: -10 }}
                 transition={{ duration: 0.35 }}
                 className="relative w-full max-w-[517px] h-[300px] sm:h-[360px] md:h-[420px] lg:h-[440px] rounded-[20px] sm:rounded-[24px] border-t border-t-[#314158] bg-[#1D293D80] backdrop-blur-[120px] overflow-visible px-3 sm:px-0"
               >
-                {/* GLOW */}
+                {/* GLOW BACKGROUND */}
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${activeSolution.color} opacity-30 blur-[120px] sm:blur-[140px]`}
                 />
 
-                {/* INNER DIV */}
-                <div className="absolute top-[18px] sm:top-[24px] md:top-[27px] left-1/2 -translate-x-1/2 w-[88%] sm:w-[82%] md:w-[384px] h-[240px] sm:h-[280px] md:h-[334px] rounded-[18px] sm:rounded-[22px] bg-[#071133] border border-[#1E293B] px-4 sm:px-5 py-4 sm:py-5">
-                  {/* TOP */}
+                {/* MAIN CARD */}
+                <motion.div
+                  className="absolute top-[18px] sm:top-[24px] md:top-[27px] left-1/2 -translate-x-1/2 w-[88%] sm:w-[82%] md:w-[384px] h-[240px] sm:h-[280px] md:h-[334px] rounded-[18px] sm:rounded-[22px] bg-[#071133] border border-[#1E293B] px-4 sm:px-5 py-4 sm:py-5"
+                  initial={{ opacity: 0, y: -15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  {/* TOP BAR */}
                   <div className="flex items-center justify-between">
                     {/* ICON */}
                     <div
                       className={`w-[36px] h-[36px] sm:w-[42px] sm:h-[42px] rounded-[10px] sm:rounded-[12px] bg-gradient-to-r ${activeSolution.color} flex items-center justify-center`}
                     >
-                      <div className="text-white text-[15px] sm:text-[18px]">
+                      <motion.div
+                        whileHover={{ rotate: 10 }}
+                        className="text-white text-[15px] sm:text-[18px]"
+                      >
                         {activeSolution.icon}
-                      </div>
+                      </motion.div>
                     </div>
 
                     {/* BADGE */}
@@ -238,7 +287,7 @@ const SolutionsSection = () => {
                     </div>
                   </div>
 
-                  {/* TITLE */}
+                  {/* TITLE & DESC */}
                   <div className="mt-6 sm:mt-8 md:mt-10">
                     <h1
                       style={{ fontFamily: "ClashDisplay" }}
@@ -246,7 +295,6 @@ const SolutionsSection = () => {
                     >
                       {activeSolution.dashboardTitle}
                     </h1>
-
                     <p className="mt-2 text-[12px] sm:text-[13px] md:text-[14px] text-[#94A3B8] leading-[20px]">
                       {activeSolution.dashboardDesc}
                     </p>
@@ -254,42 +302,42 @@ const SolutionsSection = () => {
 
                   {/* PROGRESS BARS */}
                   <div className="mt-6 sm:mt-8 md:mt-10 flex flex-col gap-4 sm:gap-5">
-                    {activeSolution.lines.map((line, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center gap-2 sm:gap-3"
-                      >
+                    {activeSolution.lines.map((line, idx) => (
+                      <div key={idx} className="flex items-center gap-2 sm:gap-3">
                         {/* DOT */}
                         <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 rounded-full bg-[#13203F]" />
-
                         {/* BAR */}
                         <div className="flex-1 h-[5px] sm:h-[6px] rounded-full bg-[#1E293B] overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: line }}
-                            transition={{ duration: 0.7 }}
+                            transition={{ duration: 0.7, ease: "easeOut" }}
                             className={`h-full bg-gradient-to-r ${activeSolution.color}`}
                           />
                         </div>
                       </div>
                     ))}
                   </div>
-                </div>
+                </motion.div>
 
-                {/* LIVE SYNC */}
-                <div className="absolute bottom-[18px] sm:bottom-[24px] right-[8px] sm:right-[-14px] h-[44px] sm:h-[56px] px-3 sm:px-5 rounded-[14px] sm:rounded-[18px] bg-[#1E293B] border border-[#334155] flex items-center gap-2 sm:gap-3 shadow-[0px_20px_40px_rgba(0,0,0,0.35)] z-20">
+                {/* LIVE SYNC TAG */}
+                <motion.div
+                  className="absolute bottom-[18px] sm:bottom-[24px] right-[8px] sm:right-[-14px] h-[44px] sm:h-[56px] px-3 sm:px-5 rounded-[14px] sm:rounded-[18px] bg-[#1E293B] border border-[#334155] flex items-center gap-2 sm:gap-3 shadow-[0px_20px_40px_rgba(0,0,0,0.35)] z-20"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4, duration: 0.5 }}
+                >
                   <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#10B981]" />
-
                   <p className="text-[12px] sm:text-[14px] text-white font-medium whitespace-nowrap">
                     Live Sync
                   </p>
-                </div>
+                </motion.div>
               </motion.div>
             </AnimatePresence>
           </div>
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 

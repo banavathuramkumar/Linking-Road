@@ -1,5 +1,6 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+
 import {
   FiMessageSquare,
   FiClock,
@@ -8,6 +9,39 @@ import {
   FiInstagram,
   FiZap,
 } from "react-icons/fi";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const fadeDown = {
+  hidden: { opacity: 0, y: -20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const fadeZoom = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+};
+
+const listStagger = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.2 },
+  },
+};
+
+const iconHover = {
+  whileHover: { rotate: 10, scale: 1.1 },
+  transition: { type: "spring", stiffness: 300 },
+};
+
+const cardHover = {
+  whileHover: { scale: 1.02, boxShadow: "0px 20px 40px rgba(0,0,0,0.15)" },
+  transition: { duration: 0.3 },
+};
 
 const AutomationSection = () => {
   const automationFeatures = [
@@ -49,10 +83,11 @@ const AutomationSection = () => {
         {/* HEADING */}
         <div className="flex flex-col items-center">
           <motion.h1
-             initial={{ opacity: 0, y: 40 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true }}
-             transition={{ duration: 0.8 }}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
             style={{ fontFamily: "ClashDisplay" }}
             className="text-[36px] sm:text-[52px] lg:text-[72px] leading-none tracking-[-1px] font-semibold text-[#071133] text-center"
           >
@@ -61,12 +96,13 @@ const AutomationSection = () => {
 
           {/* INTERACTION BOX */}
           <motion.div
-              initial={{ opacity: 0, scale: 0.8, rotate: -8 }}
-              whileInView={{ opacity: 1, scale: 1, rotate: -2 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2, }}
-              className="mt-4 rotate-[-2deg] bg-white rounded-[20px] px-5 sm:px-8 py-3 shadow-[0px_15px_40px_rgba(0,0,0,0.10)]"
->
+            variants={fadeZoom}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mt-4 rotate-[-2deg] bg-white rounded-[20px] px-5 sm:px-8 py-3 shadow-[0px_15px_40px_rgba(0,0,0,0.10)]"
+          >
             <h1
               style={{ fontFamily: "ClashDisplay" }}
               className="text-[34px] sm:text-[48px] lg:text-[64px] leading-none tracking-[-1px] font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent"
@@ -77,10 +113,11 @@ const AutomationSection = () => {
 
           {/* DESCRIPTION */}
           <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4, }}
+            variants={fadeDown}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
             style={{ fontFamily: "Inter" }}
             className="mt-8 text-center text-[15px] sm:text-[20px] leading-[32px] text-[#62748E] max-w-[900px] px-2"
           >
@@ -94,7 +131,13 @@ const AutomationSection = () => {
           {/* LEFT BOX */}
           <div className="relative w-full max-w-[533px] h-[500px] rounded-[24px] border border-[#E2E8F0] bg-gradient-to-br from-[#EEF2FF] to-[#FAF5FF] overflow-hidden">
             {/* INNER CARD */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] rounded-[16px] bg-[#FFFFFFCC] border-t border-t-[#FFFFFF80] shadow-[0px_4px_24px_-4px_#0F172A0D] px-6 py-6 backdrop-blur-[20px]">
+            <motion.div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] rounded-[16px] bg-[#FFFFFFCC] border-t border-t-[#FFFFFF80] shadow-[0px_4px_24px_-4px_#0F172A0D] px-6 py-6 backdrop-blur-[20px]"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
               {/* TOP */}
               <div className="flex items-start gap-4">
                 {/* PROFILE */}
@@ -131,20 +174,36 @@ const AutomationSection = () => {
               </div>
 
               {/* CENTER ICON */}
-              <div className="flex items-center justify-center my-5">
+              <motion.div
+                className="flex items-center justify-center my-5"
+                variants={fadeZoom}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
                 <div className="relative flex items-center justify-center">
                   {/* LINE */}
                   <div className="absolute w-[2px] h-[36px] bg-[#E0E7FF]" />
 
                   {/* ICON */}
-                  <div className="relative z-10 w-8 h-8 rounded-full bg-[#EEF2FF] flex items-center justify-center">
+                  <motion.div
+                    className="relative z-10 w-8 h-8 rounded-full bg-[#EEF2FF] flex items-center justify-center"
+                    {...iconHover}
+                  >
                     <FiZap className="text-[#7C3AED] text-[14px]" />
-                  </div>
+                  </motion.div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* REPLY BOX */}
-              <div className="rounded-[12px] bg-[#4C229E] px-5 py-5 shadow-[0px_10px_24px_rgba(76,34,158,0.18)]">
+              <motion.div
+                className="rounded-[12px] bg-[#4C229E] px-5 py-5 shadow-[0px_10px_24px_rgba(76,34,158,0.18)]"
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
                 <p
                   style={{ fontFamily: "Inter" }}
                   className="text-[12px] leading-[24px] text-white"
@@ -155,21 +214,32 @@ const AutomationSection = () => {
                   <br />
                   flowpilot.ai/class 🚀
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
 
-          {/* RIGHT CONTAINER */}
-          <div className="w-full max-w-[533px] flex flex-col gap-6">
+          {/* RIGHT CONTAINER – Feature list */}
+          <motion.div
+            className="w-full max-w-[533px] flex flex-col gap-6"
+            variants={listStagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {automationFeatures.map((item, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="w-full min-h-[90px] rounded-[16px] border border-[#E2E8F0] border-t border-t-black/10 px-4 py-4 flex items-start gap-4 bg-white/50 backdrop-blur-[20px] hover:bg-white transition-all duration-300"
+                variants={fadeUp}
+                whileHover={cardHover.whileHover}
+                className="w-full min-h-[90px] rounded-[16px] border border-[#E2E8F0] border-t border-t-black/10 px-4 py-4 flex items-start gap-4 bg-white/50 backdrop-blur-[20px] transition-all duration-300"
               >
                 {/* ICON */}
-                <div className="w-14 h-14 rounded-[16px] bg-[#EEF2FF] flex items-center justify-center shrink-0">
+                <motion.div
+                  className="w-14 h-14 rounded-[16px] bg-[#EEF2FF] flex items-center justify-center shrink-0"
+                  {...iconHover}
+                >
                   <div className="text-[#5B21B6] text-[24px]">{item.icon}</div>
-                </div>
+                </motion.div>
 
                 {/* CONTENT */}
                 <div>
@@ -189,9 +259,9 @@ const AutomationSection = () => {
                     {item.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

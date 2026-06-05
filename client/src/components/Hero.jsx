@@ -6,12 +6,31 @@ import { FaPlay } from "react-icons/fa";
 import { FiMessageCircle, FiZap } from "react-icons/fi";
 import { motion } from "framer-motion";
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const fadeDown = {
+  hidden: { opacity: 0, y: -20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.6 } },
+};
+
+const slideLeft = {
+  hidden: { opacity: 0, x: -50 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
+};
+
 const Hero = () => {
   const navigate = useNavigate();
 
   return (
     <div className="relative w-full top-20 h-[900px] sm:h-[1100px] md:h-[1300px] lg:h-[1508px] flex flex-col items-center px-4 overflow-hidden pb-24">
-      {/* TOP BADGE */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -23,14 +42,12 @@ const Hero = () => {
         </p>
       </motion.div>
 
-      {/* HERO CONTENT */}
-     <motion.div
-  initial={{ opacity: 0, y: 40 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.7, delay: 0.1 }}
-  className="mt-10 flex flex-col items-center text-center w-full max-w-[1000px]"
->
-        {/* HEADING */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.1 }}
+        className="mt-10 flex flex-col items-center text-center w-full max-w-[1000px]"
+      >
         <h1
           style={{ fontFamily: "ClashDisplay" }}
           className="text-[34px] sm:text-[48px] md:text-[58px] lg:text-[72px] font-semibold text-[#071133] leading-[1] tracking-[-1px]"
@@ -45,7 +62,6 @@ const Hero = () => {
           Comment
         </h1>
 
-        {/* GRADIENT BOX */}
         <div className="mt-4 rotate-[-2deg] bg-white rounded-[20px] sm:rounded-[28px] px-5 sm:px-8 py-3 shadow-[0px_20px_60px_rgba(0,0,0,0.15)]">
           <h1
             style={{ fontFamily: "ClashDisplay" }}
@@ -55,16 +71,13 @@ const Hero = () => {
           </h1>
         </div>
 
-        {/* DESCRIPTION */}
         <p className="mt-8 text-[15px] sm:text-[18px] md:text-[20px] leading-[28px] text-[#6B7280] max-w-[760px] px-2">
           Automate engagement, capture leads, and drive conversions
           effortlessly. The most powerful AI social automation platform for
           modern growth teams.
         </p>
 
-        {/* BUTTONS */}
         <div className="flex flex-col sm:flex-row items-center gap-4 mt-10 w-full justify-center">
-          {/* START FREE TRIAL */}
           <button
             onClick={() => navigate("/signup")}
             className="w-full sm:w-[190px] h-[52px] rounded-full bg-[#4C229E] text-white text-[15px] sm:text-[16px] font-medium shadow-[0px_4px_6px_-4px_#615FFF40,0px_10px_15px_-3px_#615FFF40] hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2"
@@ -73,7 +86,6 @@ const Hero = () => {
             <HiArrowRight className="text-[18px]" />
           </button>
 
-          {/* DEMO BUTTON */}
           <button
             onClick={() => navigate("/demo")}
             className="w-full sm:w-[190px] h-[52px] rounded-full bg-white text-[#0F172B] text-[15px] sm:text-[16px] font-medium shadow-[0px_4px_6px_-4px_#615FFF40,0px_10px_15px_-3px_#615FFF40] hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2"
@@ -84,22 +96,31 @@ const Hero = () => {
         </div>
       </motion.div>
 
-      {/* AUTOMATION PREVIEW */}
-      <div className="relative mt-16 w-full max-w-[1100px] h-[240px] xs:h-[300px] sm:h-[420px] md:h-[520px] lg:h-[580px] rounded-[18px] sm:rounded-[24px] lg:rounded-[28px] bg-[#F8FAFC] border border-[#E2E8F0] shadow-[0px_25px_80px_rgba(0,0,0,0.12)] overflow-hidden">
-        {/* SIDEBAR */}
-        <div className="absolute left-0 top-0 w-[75px] xs:w-[95px] sm:w-[160px] md:w-[220px] lg:w-[260px] h-full border-r border-[#E2E8F0] bg-white p-2 xs:p-3 sm:p-5 flex flex-col gap-2 xs:gap-3 sm:gap-4">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={{
+          visible: { transition: { staggerChildren: 0.15 } },
+          hidden: {},
+        }}
+        className="relative mt-16 w-full max-w-[1100px] h-[240px] xs:h-[300px] sm:h-[420px] md:h-[520px] lg:h-[580px] rounded-[18px] sm:rounded-[24px] lg:rounded-[28px] bg-[#F8FAFC] border border-[#E2E8F0] shadow-[0px_25px_80px_rgba(0,0,0,0.12)] overflow-hidden"
+      >
+        <motion.div
+          variants={slideLeft}
+          className="absolute left-0 top-0 w-[75px] xs:w-[95px] sm:w-[160px] md:w-[220px] lg:w-[260px] h-full border-r border-[#E2E8F0] bg-white p-2 xs:p-3 sm:p-5 flex flex-col gap-2 xs:gap-3 sm:gap-4"
+        >
           <div className="w-[45px] xs:w-[60px] sm:w-[95px] h-[16px] xs:h-[22px] sm:h-[32px] rounded-[6px] sm:rounded-[8px] bg-[#F1F5F9]" />
-
           {[1, 2, 3, 4, 5].map((item) => (
             <div
               key={item}
               className="w-full h-[18px] xs:h-[24px] sm:h-[40px] rounded-[6px] sm:rounded-[10px] bg-[#F1F5F9]"
             />
           ))}
-        </div>
+        </motion.div>
 
-        {/* COMMENT CARD */}
-        <div
+        <motion.div
+          variants={fadeUp}
           className="
       absolute
       top-[34px]
@@ -151,10 +172,12 @@ const Hero = () => {
               "Send me the link"
             </p>
           </div>
-        </div>
+        </motion.div>
 
-        {/* SVG CONNECTION */}
-        <svg
+        <motion.svg
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
           className="
       absolute
       hidden
@@ -178,10 +201,10 @@ const Hero = () => {
             fill="none"
             strokeLinecap="round"
           />
-        </svg>
+        </motion.svg>
 
-        {/* AUTO DM CARD */}
-        <div
+        <motion.div
+          variants={fadeUp}
           className="
       absolute
       top-[72px]
@@ -235,10 +258,10 @@ const Hero = () => {
               Send Lead Magnet
             </p>
           </div>
-        </div>
+        </motion.div>
 
-        {/* CONVERSION CARD */}
-        <div
+        <motion.div
+          variants={fadeUp}
           className="
       absolute
       bottom-[18px]
@@ -287,8 +310,8 @@ const Hero = () => {
               +42.8%
             </h1>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
