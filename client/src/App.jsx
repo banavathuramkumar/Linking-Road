@@ -21,7 +21,6 @@ import Inbox from "./pages/Inbox";
 import Analytics from "./pages/Analytics";
 import AIChatAssistant from "./components/AIChatAssistant";
 
-
 const App = () => {
   return (
     <div>
