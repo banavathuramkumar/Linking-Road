@@ -15,9 +15,11 @@ const SettingsHeader = () => {
         items-center
         gap-4
         bg-[rgba(255,255,255,0.7)]
+        dark:bg-[rgba(15,23,42,0.8)]
         backdrop-blur-md
         border-b
         border-[#E2E8F099]
+        dark:border-[#1E293B99]
       "
     >
       {/* LOGO */}
@@ -33,13 +35,13 @@ const SettingsHeader = () => {
       </button>
 
       {/* Divider */}
-      <span className="text-[#CBD5E1] text-xl">/</span>
+      <span className="text-[#CBD5E1] dark:text-slate-700 text-xl">/</span>
 
       {/* Page Name */}
       <div className="flex items-center gap-2">
         <FiSettings
           size={16}
-          className="text-[#64748B]"
+          className="text-[#64748B] dark:text-slate-400"
         />
 
         <span
@@ -48,6 +50,7 @@ const SettingsHeader = () => {
             text-[14px]
             font-medium
             text-[#334155]
+            dark:text-[#E2E8F0]
           "
         >
           Setting

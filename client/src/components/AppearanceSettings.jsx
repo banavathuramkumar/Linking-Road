@@ -52,19 +52,19 @@ const AppearanceSettings = () => {
             ${
               theme === "light"
                 ? "border-[#615FFF] shadow-[0_0_0_3px_rgba(97,95,255,0.15)]"
-                : "border-[#E2E8F0]"
+                : "border-[#E2E8F0] dark:border-[#1E293B]"
             }
           `}
         >
-          <div className="bg-white rounded-[12px] border border-[#E2E8F0] p-3 sm:p-4">
-            <div className="h-3 rounded-full bg-[#E5E7EB] mb-3" />
-            <div className="h-3 w-[60%] rounded-full bg-[#E5E7EB] mb-4" />
-            <div className="h-[80px] rounded-lg bg-[#F1F5F9]" />
+          <div className="bg-white dark:bg-[#0F172A] rounded-[12px] border border-[#E2E8F0] dark:border-[#1E293B] p-3 sm:p-4">
+            <div className="h-3 rounded-full bg-[#E5E7EB] dark:bg-[#334155] mb-3" />
+            <div className="h-3 w-[60%] rounded-full bg-[#E5E7EB] dark:bg-[#334155] mb-4" />
+            <div className="h-[80px] rounded-lg bg-[#F1F5F9] dark:bg-[#020617]" />
           </div>
 
           <p
             style={{ fontFamily: "Inter" }}
-            className="text-center mt-3 sm:mt-4 text-[14px] sm:text-[15px] font-medium text-[#0F172A]"
+            className="text-center mt-3 sm:mt-4 text-[14px] sm:text-[15px] font-medium text-[#0F172A] dark:text-white"
           >
             Light Mode
           </p>
@@ -85,7 +85,7 @@ const AppearanceSettings = () => {
             ${
               theme === "dark"
                 ? "border-[#615FFF] shadow-[0_0_0_3px_rgba(97,95,255,0.15)]"
-                : "border-[#E2E8F0]"
+                : "border-[#E2E8F0] dark:border-[#1E293B]"
             }
           `}
         >

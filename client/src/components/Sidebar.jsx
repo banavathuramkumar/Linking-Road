@@ -51,11 +51,11 @@ const Sidebar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
   return (
     <>
       {/* DESKTOP SIDEBAR */}
-      <aside className="hidden lg:flex w-72 bg-white border-r border-[#E2E8F0] flex-col justify-between shrink-0">
+      <aside className="hidden lg:flex w-72 bg-white dark:bg-[#0F172A] border-r border-[#E2E8F0] dark:border-[#1E293B] flex-col justify-between shrink-0">
         <div>
           {/* Logo / Header */}
           <div 
-            className="h-[95px] flex items-center justify-center border-b border-[#E2E8F0] px-6 cursor-pointer" 
+            className="h-[95px] flex items-center justify-center border-b border-[#E2E8F0] dark:border-[#1E293B] px-6 cursor-pointer" 
             onClick={() => navigate("/dashboard")}
           >
             <img src="/logo.png" alt="Linkroad logo" className="h-10 object-contain" />
@@ -73,7 +73,7 @@ const Sidebar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-[16px] font-medium transition-all duration-300 ${
                     active
                       ? "bg-gradient-to-r from-[#4C229E]/90 to-[#F754B4] text-white shadow-md"
-                      : "text-[#64748B] hover:text-[#0F172B] hover:bg-[#F8FAFC]"
+                      : "text-[#64748B] dark:text-slate-400 hover:text-[#0F172B] dark:hover:text-white hover:bg-[#F8FAFC] dark:hover:bg-[#1E293B]"
                   }`}
                 >
                   <Icon className={`w-5 h-5 ${active ? "text-white" : "text-[#64748B]"}`} />
@@ -105,9 +105,9 @@ const Sidebar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
             className="fixed inset-0 bg-black/40 backdrop-blur-sm" 
             onClick={() => setMobileMenuOpen && setMobileMenuOpen(false)}
           />
-          <aside className="relative w-72 max-w-[80vw] bg-white h-full flex flex-col justify-between shadow-2xl animate-in slide-in-from-left duration-300">
+          <aside className="relative w-72 max-w-[80vw] bg-white dark:bg-[#0F172A] h-full flex flex-col justify-between shadow-2xl animate-in slide-in-from-left duration-300">
             <div>
-              <div className="h-[95px] flex items-center justify-between border-b border-[#E2E8F0] px-6">
+              <div className="h-[95px] flex items-center justify-between border-b border-[#E2E8F0] dark:border-[#1E293B] px-6">
                 <div 
                   className="cursor-pointer" 
                   onClick={() => { navigate("/"); setMobileMenuOpen && setMobileMenuOpen(false); }}
@@ -116,7 +116,7 @@ const Sidebar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
                 </div>
                 <button
                   onClick={() => setMobileMenuOpen && setMobileMenuOpen(false)}
-                  className="w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center text-gray-500 hover:text-black transition-colors"
+                  className="w-8 h-8 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1E293B] flex items-center justify-center text-gray-500 dark:text-slate-400 hover:text-black dark:hover:text-white transition-colors"
                 >
                   <FiX className="w-5 h-5" />
                 </button>
@@ -133,7 +133,7 @@ const Sidebar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
                       className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-[16px] font-medium transition-all duration-300 ${
                         active
                           ? "bg-gradient-to-r from-[#4C229E]/90 to-[#F754B4] text-white shadow-md"
-                          : "text-[#64748B] hover:text-[#0F172B] hover:bg-[#F8FAFC]"
+                          : "text-[#64748B] dark:text-slate-400 hover:text-[#0F172B] dark:hover:text-white hover:bg-[#F8FAFC] dark:hover:bg-[#1E293B]"
                       }`}
                     >
                       <Icon className={`w-5 h-5 ${active ? "text-white" : "text-[#64748B]"}`} />
