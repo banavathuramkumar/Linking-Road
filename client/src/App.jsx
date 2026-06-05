@@ -17,7 +17,9 @@ import Dashboard from "./pages/Dashboard";
 import Referrals from "./pages/Referrals";
 import Billing from "./pages/Billing";
 import Settings from "./pages/Settings";
-import Notifications from "./pages/Notifications";
+import Inbox from "./pages/Inbox";
+import Analytics from "./pages/Analytics";
+
 
 const App = () => {
   return (
@@ -35,11 +37,12 @@ const App = () => {
         <Route path="/referrals" element={<Referrals/>} />
         <Route path="/billing" element={<Billing/>} />
         <Route path="/settings" element={<Settings/>} />
-        <Route path="/notifications" element={<Notifications/>} />
         <Route path="/automations" element={<Automations />} />
         <Route path="/leads" element={<Leads />} />
         <Route path="/automations/builder" element={<WorkflowBuilder />} />
         <Route path="/templates" element={<Templates />} />
+        <Route path="/inbox" element={<Inbox />} />
+        <Route path="/analytics" element={<Analytics />} />
       </Routes>
     </div>
   );
