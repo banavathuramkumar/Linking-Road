@@ -21,9 +21,9 @@ const Sidebar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
   const sidebarLinks = [
     { name: "Dashboard", icon: HiOutlineViewGrid, path: "/dashboard" },
     { name: "Automations", icon: HiOutlineLightningBolt, path: "/automations" },
-    { name: "Inbox", icon: HiOutlineMail },
+    { name: "Inbox", icon: HiOutlineMail, path: "/inbox" },
     { name: "Leads", icon: HiOutlineUserGroup, path: "/leads" },
-    { name: "Analytics", icon: HiOutlineChartPie },
+    { name: "Analytics", icon: HiOutlineChartPie, path: "/analytics" },
     { name: "Templates", icon: HiOutlineTemplate, path: "/templates" },
     { name: "Referrals", icon: HiOutlineGift, path: "/referrals" },
     { name: "Billing", icon: HiOutlineCreditCard, path: "/billing" },
