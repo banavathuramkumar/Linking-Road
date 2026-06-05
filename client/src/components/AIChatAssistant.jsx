@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMessageSquare } from "react-icons/fi";
@@ -31,9 +32,7 @@ const chatBoxStyles = {
 const AIChatAssistant = () => {
   const location = useLocation();
   const [open, setOpen] = useState(false);
-
   const [message, setMessage] = useState("");
-
   const [messages, setMessages] = useState([
     {
       type: "ai",
@@ -48,22 +47,21 @@ const AIChatAssistant = () => {
       text: "I can help you generate high-converting DMs. What's the goal of your message? (e.g., welcome new followers, share a lead magnet, book a call)",
     },
   ]);
+  const hideOnPaths = ["/login", "/signup", "/", "/inbox", "/dashboard"];
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 640);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
-  const hideOnPaths = ["/login", "/signup", "/", "/inbox", ];
   if (hideOnPaths.includes(location.pathname)) return null;
 
   const handleSend = () => {
     if (!message.trim()) return;
-
-    const userMessage = {
-      type: "user",
-      text: message,
-    };
-
+    const userMessage = { type: "user", text: message };
     setMessages((prev) => [...prev, userMessage]);
-
     setMessage("");
-
     setTimeout(() => {
       setMessages((prev) => [
         ...prev,
@@ -98,7 +96,6 @@ const AIChatAssistant = () => {
                 flexDirection: "column",
               }}
             >
-              {/* Header */}
               <div
                 style={{
                   width: "100%",
@@ -133,7 +130,6 @@ const AIChatAssistant = () => {
                   >
                     ✦
                   </div>
-
                   <div>
                     <h3
                       style={{
@@ -145,7 +141,6 @@ const AIChatAssistant = () => {
                     >
                       LINKINGROAD
                     </h3>
-
                     <p
                       style={{
                         color: "rgba(255,255,255,0.85)",
@@ -157,7 +152,6 @@ const AIChatAssistant = () => {
                     </p>
                   </div>
                 </div>
-
                 <button
                   onClick={() => setOpen(false)}
                   style={{
@@ -171,8 +165,6 @@ const AIChatAssistant = () => {
                   ✕
                 </button>
               </div>
-
-              {/* Chat body */}
               <div
                 style={{
                   flex: 1,
@@ -208,7 +200,6 @@ const AIChatAssistant = () => {
                         ✦
                       </div>
                     )}
-
                     <div
                       style={{
                         maxWidth: "80%",
@@ -235,8 +226,6 @@ const AIChatAssistant = () => {
                   </div>
                 ))}
               </div>
-
-              {/* Input bar */}
               <div
                 style={{
                   padding: "16px",
@@ -271,7 +260,6 @@ const AIChatAssistant = () => {
                       fontSize: "14px",
                     }}
                   />
-
                   <button
                     onClick={handleSend}
                     style={{
@@ -289,7 +277,6 @@ const AIChatAssistant = () => {
                     ➤
                   </button>
                 </div>
-
                 <p
                   style={{
                     marginTop: 8,
@@ -314,9 +301,9 @@ const AIChatAssistant = () => {
         style={{
           position: "fixed",
           bottom: 24,
-          right: window.innerWidth < 640 ? 12 : 24,
-          width: window.innerWidth < 640 ? "calc(100vw - 24px)" : 400,
-          height: window.innerWidth < 640 ? "75vh" : 584,
+          right: isMobile ? 12 : 24,
+          width: 56,
+          height: 56,
           ...assistIconStyles,
         }}
       >
