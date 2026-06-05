@@ -88,8 +88,17 @@ const SuccessStoriesSection = () => {
       <section className="w-full bg-[#F8FAFC] px-4 sm:px-6 lg:px-8 py-[70px] overflow-hidden">
         <div className="max-w-[1200px] mx-auto flex flex-col items-center">
           {/* HEADING */}
-          <div className="text-center">
-            <h1
+          <motion.div
+             className="text-center"
+             initial={{ opacity: 0, y: 40 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             transition={{ duration: 0.8 }} >
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
               style={{ fontFamily: "ClashDisplay" }}
               className="
                 text-[28px]
@@ -102,9 +111,14 @@ const SuccessStoriesSection = () => {
               "
             >
               Proven by
-            </h1>
+            </motion.h1>
 
-            <div className="mt-3 inline-block rotate-[-2deg] bg-white px-4 sm:px-5 py-2 rounded-[18px] shadow-[0px_10px_30px_rgba(0,0,0,0.08)]">
+            <motion.div
+               initial={{ opacity: 0, scale: 0.8, rotate: -8 }}
+               whileInView={{ opacity: 1, scale: 1, rotate: -2 }}
+               viewport={{ once: true }}
+               transition={{ duration: 0.8, delay: 0.25, type: "spring", stiffness: 120, }} 
+               className="mt-3 inline-block rotate-[-2deg] bg-white px-4 sm:px-5 py-2 rounded-[18px] shadow-[0px_10px_30px_rgba(0,0,0,0.08)]" >
               <h1
                 style={{ fontFamily: "ClashDisplay" }}
                 className="
@@ -123,11 +137,15 @@ const SuccessStoriesSection = () => {
               >
                 Top brands
               </h1>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* DESCRIPTION */}
-          <p
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.45 }}
             style={{ fontFamily: "Inter" }}
             className="
               mt-6
@@ -141,7 +159,7 @@ const SuccessStoriesSection = () => {
           >
             See how creators and brands transform engagement and revenue using
             FlowPilot automations.
-          </p>
+          </motion.p>
 
           {/* CARDS */}
           <div className="mt-14 w-full flex flex-wrap justify-center gap-5">

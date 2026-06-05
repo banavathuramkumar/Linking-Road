@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { FiStar } from "react-icons/fi";
 
 const TestimonialSection = () => {
@@ -46,22 +47,37 @@ const TestimonialSection = () => {
           {/* HEADING */}
           <div className="flex flex-wrap items-center justify-center gap-4">
             {/* NORMAL HEADING */}
-            <h1
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
               style={{ fontFamily: "ClashDisplay" }}
               className="text-[40px] sm:text-[54px] lg:text-[64px] leading-[42px] sm:leading-[56px] lg:leading-[64px] tracking-[-1.5px] font-semibold text-[#0F172A]"
             >
               Loved By
-            </h1>
+            </motion.h1>
 
             {/* GRADIENT CARD */}
-            <div className="rotate-[-2deg] bg-white rounded-[22px] px-6 sm:px-8 py-2 shadow-[0px_4px_4px_0px_#00000030]">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: -2 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.8,
+                delay: 0.2,
+                type: "spring",
+                stiffness: 120,
+              }}
+              className="rotate-[-2deg] bg-white rounded-[22px] px-6 sm:px-8 py-2 shadow-[0px_4px_4px_0px_#00000030]"
+            >
               <h1
                 style={{ fontFamily: "ClashDisplay" }}
                 className="text-[40px] sm:text-[54px] lg:text-[64px] leading-[42px] sm:leading-[56px] lg:leading-[64px] tracking-[-1.5px] font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent"
               >
                 Growth Teams
               </h1>
-            </div>
+            </motion.div>
           </div>
         </div>
 

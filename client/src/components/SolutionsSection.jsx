@@ -75,44 +75,64 @@ const SolutionsSection = () => {
         {/* TOP SECTION */}
         <div className="w-full max-w-[1131px] mx-auto flex flex-col items-center">
           {/* SMALL TOP BADGE */}
-          <div className="w-[202px] h-[38px] rounded-full border border-t border-[#FFFFFF] bg-[#0000000D] flex items-center justify-center">
+          <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="w-[202px] h-[38px] rounded-full border border-t border-[#FFFFFF] bg-[#0000000D] flex items-center justify-center"
+>
             <p
               style={{ fontFamily: "Inter" }}
               className="text-[14px] leading-[20px] font-medium text-[#00000080] text-center"
             >
               ⚡ Built for your workflow
             </p>
-          </div>
+          </motion.div>
 
           {/* HEADING */}
           <div className="mt-6 flex flex-col items-center">
             {/* ONE PLATFORM */}
-            <h1
+           <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
               style={{ fontFamily: "ClashDisplay" }}
               className="text-[34px] sm:text-[48px] lg:text-[60px] leading-[60px] tracking-[-1px] font-semibold text-black text-center"
             >
               One platform.
-            </h1>
+            </motion.h1>
 
             {/* ENDLESS SOLUTIONS BOX */}
-            <div className="mt-4 rotate-[-2.41deg] w-auto min-h-[80px] px-6 sm:px-8 py-[10px] rounded-[22px] bg-white shadow-[0px_4px_4px_0px_#00000040] flex items-center justify-center">
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: -2.41 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2, }}
+               className="mt-4 rotate-[-2.41deg] w-auto min-h-[80px] px-6 sm:px-8 py-[10px] rounded-[22px] bg-white shadow-[0px_4px_4px_0px_#00000040] flex items-center justify-center"
+>
               <h1
                 style={{ fontFamily: "ClashDisplay" }}
                 className="text-[34px] sm:text-[48px] lg:text-[60px] leading-[60px] tracking-[-1.5px] font-semibold bg-[linear-gradient(132.3deg,rgba(76,34,158,0.68)_12.83%,#F754B4_89.1%)] bg-clip-text text-transparent text-center"
               >
                 Endless solutions.
               </h1>
-            </div>
+            </motion.div>
 
             {/* DESCRIPTION */}
-            <p
+            <motion.p
+               initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+               transition={{ duration: 0.8, delay: 0.4, }}
               style={{ fontFamily: "Inter" }}
               className="mt-8 max-w-[760px] text-center text-[16px] sm:text-[18px] leading-[28px] text-[#90A1B9] px-2"
             >
               Whether you're an agency scaling client results or a creator
               building an audience, LINKINGROAD adapts to your unique growth
               strategy.
-            </p>
+            </motion.p>
           </div>
         </div>
 
@@ -168,15 +188,7 @@ const SolutionsSection = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.3 }}
-                        className="
-      mt-3 sm:mt-5
-      max-w-full sm:max-w-[340px]
-      text-[13px] sm:text-[15px]
-      leading-[22px] sm:leading-[30px]
-      text-[#94A3B8]
-      break-words
-      pr-1
-    "
+                        className=" mt-3 sm:mt-5 max-w-full sm:max-w-[340px] text-[13px] sm:text-[15px] leading-[22px] sm:leading-[30px] text-[#94A3B8] break-words pr-1 "
                       >
                         {item.description}
                       </motion.p>

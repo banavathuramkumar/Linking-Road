@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { FiStar } from "react-icons/fi";
 
@@ -19,7 +20,13 @@ const CTASection = () => {
       {/* MAIN CONTENT */}
       <div className="relative z-10 max-w-[1200px] mx-auto flex flex-col items-center text-center">
         {/* TOP BADGE */}
-        <div className="h-[42px] px-5 rounded-full border border-[#FFFFFF1A] bg-[#FFFFFF12] backdrop-blur-md flex items-center gap-2">
+        <motion.div
+  initial={{ opacity: 0, y: -20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6 }}
+  className="h-[42px] px-5 rounded-full border border-[#FFFFFF1A] bg-[#FFFFFF12] backdrop-blur-md flex items-center gap-2"
+>
           <FiStar className="text-white text-[15px]" />
 
           <span
@@ -28,7 +35,7 @@ const CTASection = () => {
           >
             Ready to scale?
           </span>
-        </div>
+        </motion.div>
 
         {/* HEADING */}
         <div className="mt-10 flex flex-col items-center">

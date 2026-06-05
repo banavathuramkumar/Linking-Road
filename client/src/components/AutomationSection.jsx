@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import {
   FiMessageSquare,
   FiClock,
@@ -47,31 +48,45 @@ const AutomationSection = () => {
       <div className="max-w-[1179px] mx-auto">
         {/* HEADING */}
         <div className="flex flex-col items-center">
-          <h1
+          <motion.h1
+             initial={{ opacity: 0, y: 40 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             transition={{ duration: 0.8 }}
             style={{ fontFamily: "ClashDisplay" }}
             className="text-[36px] sm:text-[52px] lg:text-[72px] leading-none tracking-[-1px] font-semibold text-[#071133] text-center"
           >
             Automate Every
-          </h1>
+          </motion.h1>
 
           {/* INTERACTION BOX */}
-          <div className="mt-4 rotate-[-2deg] bg-white rounded-[20px] px-5 sm:px-8 py-3 shadow-[0px_15px_40px_rgba(0,0,0,0.10)]">
+          <motion.div
+              initial={{ opacity: 0, scale: 0.8, rotate: -8 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: -2 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2, }}
+              className="mt-4 rotate-[-2deg] bg-white rounded-[20px] px-5 sm:px-8 py-3 shadow-[0px_15px_40px_rgba(0,0,0,0.10)]"
+>
             <h1
               style={{ fontFamily: "ClashDisplay" }}
               className="text-[34px] sm:text-[48px] lg:text-[64px] leading-none tracking-[-1px] font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent"
             >
               Interaction
             </h1>
-          </div>
+          </motion.div>
 
           {/* DESCRIPTION */}
-          <p
+          <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4, }}
             style={{ fontFamily: "Inter" }}
             className="mt-8 text-center text-[15px] sm:text-[20px] leading-[32px] text-[#62748E] max-w-[900px] px-2"
           >
             Never miss a lead. Connect your social channels and let AI handle
             engagement 24/7.
-          </p>
+          </motion.p>
         </div>
 
         {/* CONTENT */}

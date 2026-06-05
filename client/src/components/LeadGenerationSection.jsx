@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { FiMail, FiUsers, FiTrendingUp } from "react-icons/fi";
 
 const LeadGenerationSection = () => {
@@ -34,32 +35,42 @@ const LeadGenerationSection = () => {
           {/* HEADING */}
           <div className="flex flex-col items-center">
             {/* TOP TITLE */}
-            <h1
+            <motion.h1 initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
               style={{ fontFamily: "ClashDisplay" }}
               className="text-[34px] sm:text-[48px] lg:text-[60px] leading-[38px] sm:leading-[54px] lg:leading-[60px] tracking-[-1px] sm:tracking-[-1.5px] font-semibold text-[#0F172A] text-center"
             >
               Turn Engagement Into
-            </h1>
+            </motion.h1>
 
             {/* GRADIENT CARD */}
-            <div className="mt-4 rotate-[-2deg] bg-white rounded-[22px] px-6 sm:px-8 py-3 shadow-[0px_4px_4px_0px_#00000030]">
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: -2 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2, }}
+                className="mt-4 rotate-[-2deg] bg-white rounded-[22px] px-6 sm:px-8 py-3 shadow-[0px_4px_4px_0px_#00000030]"
+>
               <h1
                 style={{ fontFamily: "ClashDisplay" }}
                 className="text-[34px] sm:text-[48px] lg:text-[60px] leading-[38px] sm:leading-[54px] lg:leading-[60px] tracking-[-1px] sm:tracking-[-1.5px] font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent text-center"
               >
                 Qualified Leads
               </h1>
-            </div>
+            </motion.div>
           </div>
 
           {/* DESCRIPTION */}
-          <p
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4, }}
             style={{ fontFamily: "Inter" }}
             className="mt-10 max-w-[820px] text-center text-[16px] sm:text-[18px] leading-[28px] text-[#64748B] px-4"
           >
             Automatically collect emails and contact info directly in the DMs.
             Sync everything to your CRM instantly.
-          </p>
+          </motion.p>
         </div>
 
         {/* CARDS */}

@@ -401,7 +401,7 @@ const SignUp = () => {
                 your DMs and comments securely.
               </p>
 
-              <button className="mt-10 h-14 px-10 rounded-2xl bg-gradient-to-r from-[#9333EA] to-[#EC4899] text-white text-[18px] font-medium shadow-2xl flex items-center justify-center gap-3 mx-auto">
+              <button className="mt-10 h-14 px-10 rounded-2xl bg-gradient-to-r from-[#9333EA] to-[#EC4899] text-white text-[18px] font-medium shadow-2xl flex items-center justify-center gap-3 mx-auto rotate-[-2deg]">
                 <FaInstagram className="text-[22px]" />
                 Connect with Instagram
               </button>

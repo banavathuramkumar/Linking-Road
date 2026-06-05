@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { FiChevronDown } from "react-icons/fi";
 
 const FAQSection = () => {
@@ -47,20 +48,28 @@ const FAQSection = () => {
       {/* CONTAINER */}
       <div className="max-w-[1440px] mx-auto flex flex-col items-center">
         {/* HEADING */}
-        <h1
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
           style={{ fontFamily: "ClashDisplay" }}
           className="text-[36px] sm:text-[48px] font-semibold tracking-[-1.2px] leading-[40px] sm:leading-[52px] text-[#0F172B] text-center"
         >
           Frequently Asked Questions
-        </h1>
+        </motion.h1>
 
         {/* SUBTEXT */}
-        <p
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
           style={{ fontFamily: "Inter" }}
           className="mt-5 text-[16px] sm:text-[18px] leading-[28px] text-[#64748B] text-center"
         >
           Everything you need to know about the product and billing.
-        </p>
+        </motion.p>
 
         {/* FAQ LIST */}
         <div className="mt-14 w-full max-w-[868px] flex flex-col gap-5">

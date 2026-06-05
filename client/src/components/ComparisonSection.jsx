@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { FiCheck, FiX } from "react-icons/fi";
 
@@ -49,43 +50,64 @@ const ComparisonSection = () => {
       {/* MAIN CONTAINER */}
       <div className="max-w-[1120px] mx-auto flex flex-col items-center">
         {/* BADGE */}
-        <div className="h-[42px] px-5 rounded-full bg-white border border-[#E2E8F0] flex items-center justify-center shadow-[0px_4px_12px_rgba(0,0,0,0.04)]">
+        <motion.div
+           initial={{ opacity: 0, y: -20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           transition={{ duration: 0.6 }}
+           className="h-[42px] px-5 rounded-full bg-white border border-[#E2E8F0] flex items-center justify-center shadow-[0px_4px_12px_rgba(0,0,0,0.04)]"
+>
           <p
             style={{ fontFamily: "GeneralSans" }}
             className="text-[14px] font-medium text-[#475569]"
           >
             ⚡ Why switch to FlowPilot?
           </p>
-        </div>
+          </motion.div>
+        
 
         {/* HEADING */}
         <div className="mt-8 flex flex-col items-center">
-          <h1
+          <motion.h1
+             initial={{ opacity: 0, y: 40 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
             style={{ fontFamily: "ClashDisplay" }}
             className="text-[34px] sm:text-[48px] lg:text-[64px] leading-none tracking-[-1px] font-semibold text-[#071133] text-center"
           >
             A platform that feels
-          </h1>
+          </motion.h1>
 
           {/* GRADIENT BOX */}
-          <div className="mt-4 rotate-[-2deg] bg-white rounded-[18px] sm:rounded-[24px] px-4 sm:px-6 py-3 shadow-[0px_15px_40px_rgba(0,0,0,0.10)]">
+          <motion.div
+             initial={{ opacity: 0, scale: 0.8, rotate: -8 }}
+             whileInView={{ opacity: 1, scale: 1, rotate: -2 }}
+             viewport={{ once: true }}
+             transition={{ duration: 0.8, delay: 0.2, }}
+             className="mt-4 rotate-[-2deg] bg-white rounded-[18px] sm:rounded-[24px] px-4 sm:px-6 py-3 shadow-[0px_15px_40px_rgba(0,0,0,0.10)]"
+>
             <h1
               style={{ fontFamily: "ClashDisplay" }}
               className="text-[30px] sm:text-[42px] lg:text-[58px] leading-none tracking-[-1px] font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent text-center"
             >
               designed, not assembled.
             </h1>
-          </div>
+          </motion.div>
         </div>
 
         {/* DESCRIPTION */}
-        <p
+        <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4, }}
           style={{ fontFamily: "GeneralSans" }}
           className="mt-8 max-w-[760px] text-center text-[15px] sm:text-[18px] leading-[30px] text-[#64748B] px-2"
         >
           Stop wrestling with outdated tools. See how FlowPilot compares to
           legacy automation platforms.
-        </p>
+        </motion.p>
 
         {/* TABLE */}
         <div className="mt-12 sm:mt-16 w-full overflow-x-auto">

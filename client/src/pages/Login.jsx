@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { HiOutlineMail } from "react-icons/hi";
@@ -15,20 +16,57 @@ const Login = () => {
       {/* LEFT SIDE */}
       <div className="hidden lg:flex w-1/2 bg-[#F7F2FF] relative p-10 overflow-hidden">
         {/* LOGO */}
-        <img
+        <motion.img
           src="/logo.png"
           alt="logo"
-          className="h-10 w-auto absolute top-10 left-10"
+          className="h-10 w-auto absolute top-10 left-10 cursor-pointer"
           onClick={() => navigate("/")}
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
         />
 
         {/* CENTER ICON */}
-        <div className="absolute left-1/2 top-[48%] -translate-x-1/2 -translate-y-1/2">
+        <motion.div
+          className="absolute left-1/2 top-[48%] -translate-x-1/2 -translate-y-1/2"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            y: [0, -15, 0],
+          }}
+          transition={{
+            opacity: { duration: 1 },
+            scale: { duration: 1 },
+            y: {
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+          }}
+        >
           <img src="Container.png" alt="container" className="w-full h-auto" />
-        </div>
+        </motion.div>
 
         {/* AUTO REPLY */}
-        <div className="absolute top-[25%] left-20">
+        <motion.div
+          className="absolute top-[25%] left-20"
+          initial={{ opacity: 0, x: -80 }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            y: [0, -10, 0],
+          }}
+          transition={{
+            opacity: { duration: 0.8, delay: 0.2 },
+            x: { duration: 0.8, delay: 0.2 },
+            y: {
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+          }}
+        >
           <div className="bg-white rounded-[24px] shadow-xl px-6 py-5 flex items-center gap-4">
             <div className="w-11 h-11 rounded-2xl bg-[#EEF4FF] flex items-center justify-center">
               <FiMessageSquare className="text-[#60A5FA] text-[20px]" />
@@ -36,10 +74,27 @@ const Login = () => {
 
             <p className="text-[#3F3F46] text-[20px] font-medium">Auto-Reply</p>
           </div>
-        </div>
+        </motion.div>
 
         {/* LEAD CAPTURED */}
-        <div className="absolute top-[28%] right-16">
+        <motion.div
+          className="absolute top-[28%] right-16"
+          initial={{ opacity: 0, x: 80 }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            y: [0, 10, 0],
+          }}
+          transition={{
+            opacity: { duration: 0.8, delay: 0.4 },
+            x: { duration: 0.8, delay: 0.4 },
+            y: {
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+          }}
+        >
           <div className="bg-white rounded-[24px] shadow-xl px-6 py-5 flex items-center gap-4 border border-[#D1FAE5]">
             <div className="w-11 h-11 rounded-2xl bg-[#ECFDF5] flex items-center justify-center">
               <FiUsers className="text-[#10B981] text-[20px]" />
@@ -49,10 +104,27 @@ const Login = () => {
               Lead Captured
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* TRIGGER */}
-        <div className="absolute bottom-[35%] left-28">
+        <motion.div
+          className="absolute bottom-[35%] left-28"
+          initial={{ opacity: 0, x: -80 }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            y: [0, -12, 0],
+          }}
+          transition={{
+            opacity: { duration: 0.8, delay: 0.6 },
+            x: { duration: 0.8, delay: 0.6 },
+            y: {
+              duration: 4.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+          }}
+        >
           <div className="bg-white rounded-[24px] shadow-xl px-6 py-5 flex items-center gap-4 border border-[#FEF3C7]">
             <div className="w-11 h-11 rounded-2xl bg-[#FFF7ED] flex items-center justify-center">
               <FiZap className="text-[#F59E0B] text-[20px]" />
@@ -60,10 +132,27 @@ const Login = () => {
 
             <p className="text-[#3F3F46] text-[20px] font-medium">Trigger</p>
           </div>
-        </div>
+        </motion.div>
 
         {/* ANALYTICS */}
-        <div className="absolute bottom-[40%] right-24">
+        <motion.div
+          className="absolute bottom-[40%] right-24"
+          initial={{ opacity: 0, x: 80 }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            y: [0, 12, 0],
+          }}
+          transition={{
+            opacity: { duration: 0.8, delay: 0.8 },
+            x: { duration: 0.8, delay: 0.8 },
+            y: {
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+          }}
+        >
           <div className="bg-white rounded-[24px] shadow-xl px-6 py-5 flex items-center gap-4">
             <div className="w-11 h-11 rounded-2xl bg-[#F5F3FF] flex items-center justify-center">
               <FiActivity className="text-[#8B5CF6] text-[20px]" />
@@ -71,13 +160,28 @@ const Login = () => {
 
             <p className="text-[#3F3F46] text-[20px] font-medium">Analytics</p>
           </div>
-        </div>
+        </motion.div>
 
         {/* LIVE ACTIVITY */}
-        <div className="absolute bottom-16 left-20 w-[420px] bg-white/70 backdrop-blur-xl rounded-[28px] shadow-2xl p-6">
+        <motion.div
+          className="absolute bottom-16 left-20 w-[420px] bg-white/70 backdrop-blur-xl rounded-[28px] shadow-2xl p-6"
+          initial={{ opacity: 0, y: 60 }}
+          animate={{
+            opacity: 1,
+            y: [0, -8, 0],
+          }}
+          transition={{
+            opacity: { duration: 1, delay: 1 },
+            y: {
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+          }}
+        >
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-[#10B981]" />
+              <div className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
 
               <p className="uppercase tracking-[3px] text-[#CBD5E1] text-[13px]">
                 Live Activity
@@ -106,12 +210,17 @@ const Login = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* FOOTER */}
-        <p className="absolute bottom-5 left-10 text-[#94A3B8] text-[14px]">
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.4 }}
+          className="absolute bottom-5 left-10 text-[#94A3B8] text-[14px]"
+        >
           © 2026 LINKINGROAD Inc. All rights reserved.
-        </p>
+        </motion.p>
       </div>
 
       {/* RIGHT SIDE */}

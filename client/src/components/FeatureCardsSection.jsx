@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 import { FiServer, FiGrid, FiShare2, FiLayers } from "react-icons/fi";
 
@@ -36,10 +37,11 @@ const FeatureCardsSection = () => {
         {/* GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {cards.map((card, index) => (
-            <div
+            <motion.div
               key={index}
-              className="w-full min-h-[225px] rounded-[24px] border border-[#E2E8F0] border-t border-t-[#F1F5F9] bg-[#F8FAFC] p-8 flex flex-col"
-            >
+              initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.15, }}
+              whileHover={{ y: -8, transition: { duration: 0.2 }, }}
+              className="w-full min-h-[225px] rounded-[24px] border border-[#E2E8F0] border-t border-t-[#F1F5F9] bg-[#F8FAFC] p-8 flex flex-col" >
               {/* ICON BOX */}
               <div className="w-[48px] h-[48px] rounded-[12px] bg-white shadow-[0px_1px_2px_-1px_#0000001A,0px_1px_3px_0px_#0000001A] flex items-center justify-center">
                 <div className="text-[#5B21B6] text-[24px]">{card.icon}</div>
@@ -60,7 +62,7 @@ const FeatureCardsSection = () => {
               >
                 {card.desc}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

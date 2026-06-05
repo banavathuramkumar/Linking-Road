@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
 
@@ -7,6 +7,17 @@ const Navbar = () => {
   const location = useLocation();
 
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 80);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navItems = [
     { name: "Features", path: "/features" },
@@ -16,10 +27,19 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="w-full fixed bg-white top-0 left-0 z-50 px-4 py-3">
+    <div
+      className={`w-full z-50 px-4 transition-all duration-500 ${
+        isScrolled ? "fixed top-0 left-0 py-3" : "absolute top-0 left-0 py-6"
+      }`}
+    >
       {/* NAVBAR */}
-      <div className="w-full h-[72px] bg-white rounded-full border border-[#E2E8F0] shadow-[0px_10px_30px_rgba(0,0,0,0.06)] px-5 lg:px-8 flex items-center justify-between">
-
+      <div
+        className={`w-full h-[72px] bg-white border border-[#E2E8F0] px-5 lg:px-8 flex items-center justify-between transition-all duration-500 ${
+          isScrolled
+            ? "rounded-full shadow-[0px_10px_30px_rgba(0,0,0,0.06)]"
+            : "rounded-full"
+        }`}
+      >
         {/* LOGO */}
         <div
           onClick={() => {
@@ -51,7 +71,6 @@ const Navbar = () => {
         {/* DESKTOP NAVIGATION */}
         <div className="hidden lg:flex items-center">
           <div className="h-[46px] px-2 flex items-center gap-1 rounded-full border border-[#E2E8F0] bg-white shadow-[0px_1px_3px_rgba(0,0,0,0.06)]">
-
             {navItems.map((item, index) => (
               <button
                 key={index}
@@ -70,7 +89,6 @@ const Navbar = () => {
 
         {/* DESKTOP ACTIONS */}
         <div className="hidden lg:flex items-center gap-5">
-
           {/* LOGIN */}
           <button
             onClick={() => navigate("/login")}
@@ -112,7 +130,6 @@ const Navbar = () => {
       {/* MOBILE MENU */}
       {mobileMenu && (
         <div className="lg:hidden mt-3 w-full rounded-[28px] bg-white border border-[#E2E8F0] shadow-[0px_25px_60px_rgba(0,0,0,0.08)] p-5 flex flex-col gap-3">
-
           {navItems.map((item, index) => (
             <button
               key={index}
@@ -166,4 +183,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
