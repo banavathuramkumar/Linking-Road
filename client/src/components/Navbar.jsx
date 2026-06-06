@@ -32,15 +32,13 @@ const Navbar = () => {
         isScrolled ? "fixed top-0 left-0 py-3" : "absolute top-0 left-0 py-6"
       }`}
     >
-      {/* NAVBAR */}
       <div
-        className={`w-full h-[72px] bg-white border border-[#E2E8F0] px-5 lg:px-8 flex items-center justify-between transition-all duration-500 ${
+        className={`w-full h-[72px] bg-white/30 backdrop-blur-lg border border-[#E2E8F0] px-5 lg:px-8 flex items-center justify-between transition-all duration-500 ${
           isScrolled
             ? "rounded-full shadow-[0px_10px_30px_rgba(0,0,0,0.06)]"
             : "rounded-full"
         }`}
       >
-        {/* LOGO */}
         <div
           onClick={() => {
             if (window.location.pathname === "/") {
@@ -68,9 +66,8 @@ const Navbar = () => {
           />
         </div>
 
-        {/* DESKTOP NAVIGATION */}
         <div className="hidden lg:flex items-center">
-          <div className="h-[46px] px-2 flex items-center gap-1 rounded-full border border-[#E2E8F0] bg-white shadow-[0px_1px_3px_rgba(0,0,0,0.06)]">
+          <div className="h-[46px] px-2 flex items-center gap-1 rounded-full border border-[#E2E8F0] bg-white/30 backdrop-blur-md shadow-[0px_1px_3px_rgba(0,0,0,0.06)]">
             {navItems.map((item, index) => (
               <button
                 key={index}
@@ -87,9 +84,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* DESKTOP ACTIONS */}
         <div className="hidden lg:flex items-center gap-5">
-          {/* LOGIN */}
           <button
             onClick={() => navigate("/login")}
             className={`text-[15px] font-semibold transition-all duration-300 ${
@@ -101,7 +96,6 @@ const Navbar = () => {
             Login
           </button>
 
-          {/* CTA */}
           <button
             onClick={() => navigate("/signup")}
             className={`h-[44px] px-6 rounded-full text-[15px] font-semibold transition-all duration-300 shadow-[0px_10px_20px_rgba(76,34,158,0.28)] ${
@@ -114,7 +108,6 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* MOBILE MENU BUTTON */}
         <button
           onClick={() => setMobileMenu(!mobileMenu)}
           className="lg:hidden w-10 h-10 rounded-full bg-[#F8FAFC] flex items-center justify-center"
@@ -127,9 +120,8 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* MOBILE MENU */}
       {mobileMenu && (
-        <div className="lg:hidden mt-3 w-full rounded-[28px] bg-white border border-[#E2E8F0] shadow-[0px_25px_60px_rgba(0,0,0,0.08)] p-5 flex flex-col gap-3">
+        <div className="lg:hidden mt-3 w-full rounded-[28px] bg-white/30 backdrop-blur-md border border-[#E2E8F0] shadow-[0px_25px_60px_rgba(0,0,0,0.08)] p-5 flex flex-col gap-3">
           {navItems.map((item, index) => (
             <button
               key={index}
@@ -147,7 +139,6 @@ const Navbar = () => {
             </button>
           ))}
 
-          {/* LOGIN */}
           <button
             onClick={() => {
               navigate("/login");
@@ -162,7 +153,6 @@ const Navbar = () => {
             Login
           </button>
 
-          {/* START AUTOMATING */}
           <button
             onClick={() => {
               navigate("/signup");

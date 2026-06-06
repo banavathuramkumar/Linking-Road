@@ -91,7 +91,7 @@ const SettingsSidebar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
     <div className="flex flex-col lg:flex-row items-start justify-center gap-6 p-4 md:p-6">
       {/* SIDEBAR */}
       {/* MOBILE HEADER */}
-      <div className="lg:hidden w-full flex items-center bg-white border-b border-[#E2E8F0] p-4 mb-4 rounded-xl">
+      <div className="lg:hidden w-full flex items-center bg-white dark:bg-[#0F172A] border-b border-[#E2E8F0] dark:border-[#1E293B] p-4 mb-4 rounded-xl">
         {/* MOBILE SLIDE SIDEBAR */}
         <>
           {/* Overlay */}
@@ -111,6 +111,7 @@ const SettingsSidebar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
       h-screen
       w-[280px]
       bg-white
+      dark:bg-[#0F172A]
       z-50
       p-5
       overflow-y-auto
@@ -123,15 +124,17 @@ const SettingsSidebar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
     `}
           >
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-[20px] font-semibold">Settings</h2>
+              <h2 className="text-[20px] font-semibold dark:text-white">Settings</h2>
 
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-[24px]"
+                className="text-[24px] dark:text-white"
               >
                 ×
               </button>
             </div>
+            
+            {/* The rest is unchanged */}
 
             <div className="flex flex-col gap-3">
               {menuItems.map((section) => (
@@ -164,7 +167,7 @@ const SettingsSidebar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
                     ${
                       activeTab === item.id
                         ? "bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] text-white"
-                        : "text-[#475569]"
+                        : "text-[#475569] dark:text-[#94A3B8] hover:bg-slate-50 dark:hover:bg-[#1E293B]"
                     }
                   `}
                         >
@@ -191,14 +194,14 @@ const SettingsSidebar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
               setMobileMenuOpen(true);
             }
           }}
-          className="p-2 rounded-lg hover:bg-[#F8FAFC]"
+          className="p-2 rounded-lg hover:bg-[#F8FAFC] dark:hover:bg-[#1E293B] dark:text-white"
         >
           <FiMenu size={24} />
         </button>
 
-        <h1 className="ml-3 text-[18px] font-semibold">Settings</h1>
+        <h1 className="ml-3 text-[18px] font-semibold dark:text-white">Settings</h1>
       </div>
-      <div className=" hidden lg:block w-[256px] h-fit px-4 py-2 rounded-[20px] bg-white self-start sticky top-6 ">
+      <div className=" hidden lg:block w-[256px] h-fit px-4 py-2 rounded-[20px] bg-white dark:bg-[#0F172A] border border-transparent dark:border-[#1E293B] self-start sticky top-6 ">
         <div className="flex flex-col gap-3">
           {menuItems.map((section) => (
             <div key={section.title}>
@@ -230,7 +233,7 @@ const SettingsSidebar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
                             ? "bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] text-white shadow-[0px_6px_18px_rgba(236,72,153,0.3)]"
                             : item.danger
                               ? "text-[#FF3B30]"
-                              : "text-[#475569]"
+                              : "text-[#475569] dark:text-[#94A3B8] hover:bg-slate-50 dark:hover:bg-[#1E293B]"
                         }
                       `}
                     >

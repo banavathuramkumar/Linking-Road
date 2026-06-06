@@ -1,0 +1,758 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; }
+
+  .scene {
+    width: 100%;
+    background: #0f0f14;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+  }
+
+  .topbar {
+    background: #1a1a24;
+    border-bottom: 1px solid #2a2a38;
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; }
+  .dot.y { background: #febc2e; }
+  .dot.g { background: #28c840; }
+  .tab-bar { display: flex; gap: 6px; margin-left: 14px; }
+  .tab {
+    background: #2a2a3a;
+    border: 1px solid #3a3a50;
+    border-radius: 8px 8px 0 0;
+    padding: 5px 16px;
+    font-size: 12px;
+    color: #888;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .tab.active {
+    background: #1e1e2e;
+    color: #c8b4ff;
+    border-bottom-color: #1e1e2e;
+  }
+  .address-bar {
+    flex: 1;
+    background: #111120;
+    border: 1px solid #2a2a38;
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: #555;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .canvas-area {
+    position: relative;
+    height: 480px;
+    background: #0f0f14;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 32px 32px;
+    overflow: hidden;
+  }
+
+  .sidebar {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 200px;
+    background: #13131c;
+    border-right: 1px solid #1e1e2e;
+    padding: 16px 12px;
+  }
+  .sidebar-title {
+    font-size: 10px;
+    color: #444;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .block-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    cursor: grab;
+    font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s;
+    border: 1px solid transparent;
+  }
+  .block-item:hover { background: #1e1e2e; }
+  .block-icon {
+    width: 24px; height: 24px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  .trigger .block-icon { background: #2a1a4a; }
+  .action .block-icon { background: #0a2a2a; }
+  .condition .block-icon { background: #1a2a0a; }
+  .trigger { color: #c8a0ff; }
+  .action { color: #50ddb8; }
+  .condition { color: #a8d060; }
+
+  .main-canvas {
+    position: absolute;
+    left: 200px; top: 0; right: 0; bottom: 0;
+  }
+
+  /* Nodes on canvas */
+  .node {
+    position: absolute;
+    border-radius: 12px;
+    padding: 12px 16px;
+    min-width: 150px;
+    font-family: 'DM Sans', sans-serif;
+    border: 1.5px solid;
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+    transition: box-shadow 0.3s;
+  }
+  .node.visible {
+    animation: nodeAppear 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  .node-label {
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    opacity: 0.6;
+  }
+  .node-name {
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .node-badge {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 6px;
+    font-weight: 500;
+  }
+  .node-port {
+    position: absolute;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 2px solid;
+  }
+  .node-port.out { right: -5px; }
+  .node-port.in { left: -5px; }
+
+  .node.trigger-node {
+    background: #180d2e;
+    border-color: #6b21d8;
+    color: #e0c8ff;
+    left: 40px; top: 60px;
+  }
+  .node.trigger-node .node-badge { background: #2a1050; color: #c8a0ff; }
+  .node-port.trigger-out { background: #8b50f8; border-color: #6b21d8; }
+
+  .node.action-node-1 {
+    background: #071c1c;
+    border-color: #0e7a6a;
+    color: #a0f0dc;
+    left: 280px; top: 30px;
+  }
+  .node.action-node-1 .node-badge { background: #0a2a28; color: #50ddb8; }
+  .node-port.action-in { background: #20c09c; border-color: #0e7a6a; }
+  .node-port.action-out { background: #20c09c; border-color: #0e7a6a; }
+
+  .node.condition-node {
+    background: #0c1a04;
+    border-color: #3a6a10;
+    color: #c0e888;
+    left: 280px; top: 180px;
+  }
+  .node.condition-node .node-badge { background: #152804; color: #a0d050; }
+
+  .node.action-node-2 {
+    background: #1a0d08;
+    border-color: #8a3a10;
+    color: #ffd0a0;
+    left: 520px; top: 110px;
+  }
+  .node.action-node-2 .node-badge { background: #2a1508; color: #ffb060; }
+
+  @keyframes nodeAppear {
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* SVG connections */
+  .connections-svg {
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+  }
+  .connection-path {
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    opacity: 0;
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+  }
+  .connection-path.draw {
+    animation: drawLine 0.6s ease-out forwards;
+  }
+  .connection-path.animated {
+    animation: drawLine 0.6s ease-out forwards, flowDash 1.5s linear 0.6s infinite;
+    stroke-dasharray: 8 6;
+    stroke-dashoffset: 0;
+  }
+  @keyframes drawLine {
+    to { opacity: 1; stroke-dashoffset: 0; }
+  }
+  @keyframes flowDash {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -28; }
+  }
+
+  /* Cursor */
+  .cursor {
+    position: absolute;
+    width: 18px; height: 24px;
+    pointer-events: none;
+    z-index: 100;
+    transition: none;
+    opacity: 0;
+  }
+  .cursor.visible { opacity: 1; }
+
+  /* Drag ghost */
+  .drag-ghost {
+    position: absolute;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+    border: 1.5px dashed;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 99;
+    font-weight: 500;
+  }
+
+  /* Bottom bar */
+  .bottom-bar {
+    background: #13131c;
+    border-top: 1px solid #1e1e2e;
+    padding: 8px 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #28c840;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  .status-text { font-size: 11px; color: #555; font-family: 'DM Sans', sans-serif; }
+
+  /* Hero text overlay */
+  .hero-overlay {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    text-align: right;
+    pointer-events: none;
+    z-index: 50;
+  }
+  .hero-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.2;
+    opacity: 0;
+    transform: translateY(10px);
+    font-family: 'DM Sans', sans-serif;
+  }
+  .hero-title.show {
+    animation: fadeUp 0.6s ease-out 0.2s forwards;
+  }
+  .hero-sub {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+    max-width: 260px;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(8px);
+    font-family: 'DM Sans', sans-serif;
+  }
+  .hero-sub.show {
+    animation: fadeUp 0.6s ease-out 0.5s forwards;
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Ripple click effect */
+  .click-ripple {
+    position: absolute;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: rgba(180, 130, 255, 0.3);
+    transform: translate(-50%, -50%) scale(0);
+    pointer-events: none;
+    animation: ripple 0.4s ease-out forwards;
+  }
+  @keyframes ripple {
+    to { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+  }
+
+  /* Node glow on connect */
+  .node.glow { box-shadow: 0 0 20px rgba(100, 60, 220, 0.4); }
+  .node.action-node-1.glow { box-shadow: 0 0 20px rgba(20, 180, 140, 0.4); }
+
+  .highlighted {
+    border-color: #a060ff !important;
+    box-shadow: 0 0 0 2px rgba(160, 96, 255, 0.3);
+  }
+
+  .tag-badge {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    font-size: 9px;
+    background: #2a1a50;
+    color: #c090ff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .tag-badge.show { opacity: 1; }
+
+  /* Toolbar icons */
+  .toolbar {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    gap: 6px;
+    z-index: 20;
+  }
+  .toolbar-btn {
+    background: #1e1e2e;
+    border: 1px solid #2a2a3a;
+    border-radius: 7px;
+    padding: 6px 10px;
+    font-size: 11px;
+    color: #666;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+  }
+  .toolbar-btn.active { background: #2a1a4a; border-color: #6b21d8; color: #c8a0ff; }
+
+  .connector-line-preview {
+    position: absolute;
+    pointer-events: none;
+    z-index: 50;
+  }
+
+  @keyframes shimmerNode {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+</style>
+
+
+<div class="scene" id="scene">
+  <!-- Browser chrome -->
+  <div class="topbar">
+    <div class="dot r"></div>
+    <div class="dot y"></div>
+    <div class="dot g"></div>
+    <div class="tab-bar">
+      <div class="tab active">⚡ Automation Builder</div>
+      <div class="tab">+ New Flow</div>
+    </div>
+    <div class="address-bar">app.autoflow.io/builder/new-workflow</div>
+  </div>
+
+  <!-- Main canvas area -->
+  <div class="canvas-area" id="canvasArea">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-title">Triggers</div>
+      <div class="block-item trigger" id="sb-webhook">
+        <div class="block-icon">⚡</div> Webhook
+      </div>
+      <div class="block-item trigger" id="sb-schedule">
+        <div class="block-icon">🕐</div> Schedule
+      </div>
+      <div class="block-item trigger" id="sb-form">
+        <div class="block-icon">📝</div> Form Submit
+      </div>
+      <div class="sidebar-title" style="margin-top:14px">Actions</div>
+      <div class="block-item action" id="sb-email">
+        <div class="block-icon">✉️</div> Send Email
+      </div>
+      <div class="block-item action" id="sb-slack">
+        <div class="block-icon">💬</div> Slack Message
+      </div>
+      <div class="block-item action" id="sb-db">
+        <div class="block-icon">🗄️</div> Update Record
+      </div>
+      <div class="sidebar-title" style="margin-top:14px">Logic</div>
+      <div class="block-item condition" id="sb-ifelse">
+        <div class="block-icon">🔀</div> If / Else
+      </div>
+      <div class="block-item condition" id="sb-delay">
+        <div class="block-icon">⏱️</div> Delay
+      </div>
+    </div>
+
+    <!-- Canvas -->
+    <div class="main-canvas" id="mainCanvas">
+      <!-- SVG connections layer -->
+      <svg class="connections-svg" id="connSvg">
+        <defs>
+          <marker id="arr1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#6b21d8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+          <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#0e7a6a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+          <marker id="arr3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#8a3a10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <path id="conn1" class="connection-path" stroke="#6b21d8" stroke-dasharray="400" stroke-dashoffset="400" marker-end="url(#arr1)"/>
+        <path id="conn2" class="connection-path" stroke="#0e7a6a" stroke-dasharray="400" stroke-dashoffset="400" marker-end="url(#arr2)"/>
+        <path id="conn3" class="connection-path" stroke="#3a6a10" stroke-dasharray="400" stroke-dashoffset="400" marker-end="url(#arr3)"/>
+        <path id="conn4" class="connection-path" stroke="#8a3a10" stroke-dasharray="400" stroke-dashoffset="400" marker-end="url(#arr3)"/>
+      </svg>
+
+      <!-- Nodes -->
+      <div class="node trigger-node" id="node1">
+        <div class="tag-badge" id="badge1">Trigger</div>
+        <div class="node-label">When</div>
+        <div class="node-name">⚡ Webhook Received</div>
+        <div class="node-badge">POST /hook</div>
+        <div class="node-port out trigger-out" style="right:-5px;top:50%"></div>
+      </div>
+
+      <div class="node action-node-1" id="node2">
+        <div class="node-port in action-in" style="left:-5px;top:50%"></div>
+        <div class="node-label">Action</div>
+        <div class="node-name">✉️ Send Email</div>
+        <div class="node-badge">via SendGrid</div>
+        <div class="node-port out action-out" style="right:-5px;top:50%"></div>
+      </div>
+
+      <div class="node condition-node" id="node3">
+        <div class="node-port in" style="left:-5px;top:50%;background:#3a6a10;border-color:#3a6a10"></div>
+        <div class="node-label">Condition</div>
+        <div class="node-name">🔀 If / Else</div>
+        <div class="node-badge">status = active</div>
+        <div class="node-port out" style="right:-5px;top:50%;background:#3a6a10;border-color:#3a6a10"></div>
+      </div>
+
+      <div class="node action-node-2" id="node4">
+        <div class="node-port in" style="left:-5px;top:50%;background:#8a3a10;border-color:#8a3a10"></div>
+        <div class="node-label">Action</div>
+        <div class="node-name">💬 Slack Alert</div>
+        <div class="node-badge">#engineering</div>
+      </div>
+
+      <!-- Drag ghost -->
+      <div class="drag-ghost" id="dragGhost" style="background:#180d2e;border-color:#6b21d8;color:#c8a0ff;">
+        ⚡ Webhook
+      </div>
+
+      <!-- Cursor SVG -->
+      <div class="cursor" id="cursor">
+        <svg width="18" height="24" viewBox="0 0 18 24" fill="none">
+          <path d="M2 2L2 18L6.5 13.5L9.5 20L11.5 19L8.5 12.5H14L2 2Z" fill="white" stroke="#333" stroke-width="1"/>
+        </svg>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div class="toolbar-btn active">Select</div>
+        <div class="toolbar-btn">Pan</div>
+        <div class="toolbar-btn">Zoom</div>
+      </div>
+    </div>
+
+    <!-- Hero text -->
+    <div class="hero-overlay">
+      <div class="hero-title" id="heroTitle">Build Automations<br>Visually</div>
+      <div class="hero-sub" id="heroSub">A powerful, canvas-based workflow builder. Connect triggers and actions with a simple drag and drop interface.</div>
+    </div>
+  </div>
+
+  <!-- Status bar -->
+  <div class="bottom-bar">
+    <div class="status-dot"></div>
+    <div class="status-text" id="statusText">Ready — drag blocks from the sidebar to build your flow</div>
+    <div style="flex:1"></div>
+    <div class="status-text">3 nodes · 2 connections</div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('mainCanvas');
+const cursor = document.getElementById('cursor');
+const dragGhost = document.getElementById('dragGhost');
+const statusText = document.getElementById('statusText');
+
+function getOffset(el, container) {
+  const er = el.getBoundingClientRect();
+  const cr = container.getBoundingClientRect();
+  return { x: er.left - cr.left, y: er.top - cr.top, w: er.width, h: er.height };
+}
+
+function setCursor(x, y) {
+  cursor.style.left = x + 'px';
+  cursor.style.top = y + 'px';
+}
+
+function addRipple(x, y) {
+  const r = document.createElement('div');
+  r.className = 'click-ripple';
+  r.style.left = x + 'px';
+  r.style.top = y + 'px';
+  canvas.appendChild(r);
+  setTimeout(() => r.remove(), 500);
+}
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+function animateCursorTo(fromX, fromY, toX, toY, duration, cb) {
+  const start = performance.now();
+  function step(now) {
+    const t = Math.min((now - start) / duration, 1);
+    const ease = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+    setCursor(lerp(fromX, toX, ease), lerp(fromY, toY, ease));
+    if (t < 1) requestAnimationFrame(step);
+    else if (cb) cb();
+  }
+  requestAnimationFrame(step);
+}
+
+function drawConnection(id, x1, y1, x2, y2, delay, animate) {
+  const path = document.getElementById(id);
+  const dx = Math.abs(x2 - x1) * 0.5;
+  const d = `M${x1},${y1} C${x1+dx},${y1} ${x2-dx},${y2} ${x2},${y2}`;
+  path.setAttribute('d', d);
+  path.style.strokeDasharray = '400';
+  path.style.strokeDashoffset = '400';
+  path.style.opacity = '0';
+  setTimeout(() => {
+    path.style.transition = 'none';
+    if (animate) {
+      path.classList.add('animated');
+      path.style.strokeDasharray = '8 6';
+      path.style.strokeDashoffset = '0';
+      path.style.opacity = '1';
+    } else {
+      path.classList.add('draw');
+    }
+  }, delay);
+}
+
+function updateConnections() {
+  const cv = canvas;
+  const svgEl = document.getElementById('connSvg');
+  const svgRect = svgEl.getBoundingClientRect();
+  const cvRect = cv.getBoundingClientRect();
+
+  function nodeCenter(id, side) {
+    const node = document.getElementById(id);
+    const r = node.getBoundingClientRect();
+    const offX = r.left - cvRect.left;
+    const offY = r.top - cvRect.top;
+    if (side === 'out') return { x: offX + r.width + 5, y: offY + r.height / 2 };
+    return { x: offX - 5, y: offY + r.height / 2 };
+  }
+
+  const n1out = nodeCenter('node1', 'out');
+  const n2in = nodeCenter('node2', 'in');
+  const n1out2 = nodeCenter('node1', 'out');
+  const n3in = nodeCenter('node3', 'in');
+  const n2out = nodeCenter('node2', 'out');
+  const n4in = nodeCenter('node4', 'in');
+  const n3out = nodeCenter('node3', 'out');
+  const n4in2 = nodeCenter('node4', 'in');
+
+  drawConnection('conn1', n1out.x, n1out.y, n2in.x, n2in.y, 0, false);
+  drawConnection('conn2', n1out.x, n1out.y + 10, n3in.x, n3in.y, 300, false);
+  drawConnection('conn3', n2out.x, n2out.y + 5, n4in.x, n4in.y - 10, 600, false);
+  drawConnection('conn4', n3out.x, n3out.y, n4in.x, n4in.y + 10, 900, false);
+}
+
+let animRunning = false;
+function runAnimation() {
+  if (animRunning) return;
+  animRunning = true;
+
+  const nodes = ['node1','node2','node3','node4'];
+  nodes.forEach(id => {
+    const n = document.getElementById(id);
+    n.classList.remove('visible','highlighted','glow');
+    n.style.opacity = '0';
+  });
+  ['conn1','conn2','conn3','conn4'].forEach(id => {
+    const p = document.getElementById(id);
+    p.classList.remove('draw','animated');
+    p.style.opacity = '0';
+  });
+  document.getElementById('badge1').classList.remove('show');
+  cursor.classList.remove('visible');
+  dragGhost.style.opacity = '0';
+  document.getElementById('heroTitle').classList.remove('show');
+  document.getElementById('heroSub').classList.remove('show');
+
+  let cx = 60, cy = 200;
+  setCursor(cx, cy);
+
+  // Phase 1: cursor appears, moves to sidebar
+  setTimeout(() => {
+    cursor.classList.add('visible');
+    statusText.textContent = 'Drag a trigger onto the canvas...';
+  }, 300);
+
+  // Move to webhook in sidebar
+  setTimeout(() => {
+    animateCursorTo(cx, cy, 40, 72, 600, () => {
+      cx = 40; cy = 72;
+      addRipple(cx, cy);
+      statusText.textContent = 'Dragging Webhook trigger...';
+      // Show drag ghost
+      dragGhost.style.left = (cx + 10) + 'px';
+      dragGhost.style.top = (cy + 10) + 'px';
+      dragGhost.style.opacity = '0.9';
+      // Move ghost + cursor to canvas drop zone
+      setTimeout(() => {
+        const targetX = 55; const targetY = 75;
+        const startGX = cx + 10, startGY = cy + 10;
+        const dur = 700;
+        const start = performance.now();
+        function animDrag(now) {
+          const t = Math.min((now - start) / dur, 1);
+          const e = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+          const gx = lerp(startGX, targetX + 5, e);
+          const gy = lerp(startGY, targetY + 5, e);
+          const curx = lerp(cx, targetX, e);
+          const cury = lerp(cy, targetY, e);
+          dragGhost.style.left = gx + 'px';
+          dragGhost.style.top = gy + 'px';
+          setCursor(curx, cury);
+          if (t < 1) requestAnimationFrame(animDrag);
+          else {
+            cx = targetX; cy = targetY;
+            dragGhost.style.opacity = '0';
+            // Drop node1
+            const n1 = document.getElementById('node1');
+            n1.classList.add('visible');
+            document.getElementById('badge1').classList.add('show');
+            addRipple(cx + 75, cy + 30);
+            statusText.textContent = 'Trigger placed! Now connecting actions...';
+          }
+        }
+        requestAnimationFrame(animDrag);
+      }, 200);
+    });
+  }, 800);
+
+  // Phase 2: click action blocks to add them
+  setTimeout(() => {
+    animateCursorTo(cx, cy, 55, 45, 400, () => {
+      cx = 55; cy = 45;
+      addRipple(cx + 10, cy + 20);
+      const n2 = document.getElementById('node2');
+      n2.classList.add('visible');
+      statusText.textContent = 'Send Email action added';
+    });
+  }, 2400);
+
+  setTimeout(() => {
+    animateCursorTo(55, 45, 55, 195, 450, () => {
+      cx = 55; cy = 195;
+      addRipple(cx + 10, cy + 20);
+      const n3 = document.getElementById('node3');
+      n3.classList.add('visible');
+      statusText.textContent = 'If/Else condition added';
+    });
+  }, 3200);
+
+  setTimeout(() => {
+    animateCursorTo(55, 195, 55, 125, 350, () => {
+      cx = 55; cy = 125;
+      addRipple(cx + 10, cy + 20);
+      const n4 = document.getElementById('node4');
+      n4.classList.add('visible');
+      statusText.textContent = 'Slack Alert action added';
+    });
+  }, 4000);
+
+  // Phase 3: draw connections
+  setTimeout(() => {
+    statusText.textContent = 'Drawing connections...';
+    updateConnections();
+  }, 4700);
+
+  // Phase 4: hover/highlight nodes
+  setTimeout(() => {
+    const n1 = document.getElementById('node1');
+    animateCursorTo(cx, cy, 115, 90, 500, () => {
+      n1.classList.add('glow');
+      statusText.textContent = 'Automation ready to run ✓';
+    });
+  }, 5600);
+
+  setTimeout(() => {
+    document.getElementById('node1').classList.remove('glow');
+    animateCursorTo(115, 90, 370, 60, 600, () => {
+      document.getElementById('node2').classList.add('glow');
+    });
+  }, 6300);
+
+  setTimeout(() => {
+    document.getElementById('node2').classList.remove('glow');
+    document.getElementById('heroTitle').classList.add('show');
+    document.getElementById('heroSub').classList.add('show');
+    statusText.textContent = '4 nodes · 4 connections · Live';
+  }, 7100);
+
+  // Loop
+  setTimeout(() => {
+    animRunning = false;
+    setTimeout(runAnimation, 2500);
+  }, 9000);
+}
+
+// Start after a brief delay
+setTimeout(runAnimation, 600);
+</script>
