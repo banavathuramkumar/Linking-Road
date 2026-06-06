@@ -308,13 +308,32 @@
   line-height: 1.35;
 }
 
-/* RESPONSIVE DESIGN FOR PROFILE PANEL IN INBOX */
+/* RESPONSIVE DESIGN FOR PROFILE PANEL IN INBOX & MODAL BLUR WORK */
+.profile-open .profile-page {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 480px;
+  max-width: 92%;
+  height: 85vh;
+  z-index: 50;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #f1f5f9;
+}
+
 @media (max-width: 768px) {
-  .profile-page {
+  .profile-page,
+  .profile-open .profile-page {
     position: fixed;
     right: 0;
     top: 0;
+    left: 0;
+    transform: none;
     width: 100%;
+    max-width: 100%;
     height: 100%;
     z-index: 2000;
     border-left: none;

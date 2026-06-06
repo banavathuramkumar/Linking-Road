@@ -1,111 +1,137 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import 'tailwindcss';
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+/* ==========================================
+   System Status Card UI Refinement
+   ========================================== */
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+/* Card Container */
+.flex.gap-6 > div.w-\[280px\] {
+    width: 320px !important;
+    min-height: 520px !important;
+    padding: 32px 28px !important;
+    border-radius: 28px !important;
+    box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.02), 0 8px 30px rgba(0, 0, 0, 0.02) !important;
+    border: 1px solid #f1f5f9 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    background-color: white !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+/* Card Title */
+.flex.gap-6 > div.w-\[280px\] h2 {
+    color: #0f172a !important;
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.03em !important;
+    margin-bottom: 28px !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 
-body {
-  margin: 0;
+/* Status Rows */
+.flex.gap-6 > div.w-\[280px\] p {
+    display: block !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #475569 !important;
+    margin-top: 0 !important;
+    margin-bottom: 26px !important;
+    line-height: 1.5 !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+/* Hide original green dot emoji */
+.flex.gap-6 > div.w-\[280px\] p::first-letter {
+    font-size: 0 !important;
+    color: transparent !important;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+/* Status Badge Base style */
+.flex.gap-6 > div.w-\[280px\] p span {
+    display: flex !important;
+    width: max-content !important;
+    position: relative !important;
+    align-items: center !important;
+    margin-left: 16px !important;
+    margin-top: 8px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    padding: 4px 10px !important;
+    border-radius: 6px !important;
+    background-color: #ecfdf5 !important; /* light green */
+    color: #047857 !important; /* dark green */
+    border: 1px solid #d1fae5 !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
+/* Custom solid status dot */
+.flex.gap-6 > div.w-\[280px\] p span::before {
+    content: "" !important;
+    position: absolute !important;
+    left: -16px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    display: inline-block !important;
+    width: 6px !important;
+    height: 6px !important;
+    background-color: #10b981 !important; /* solid green dot */
+    border-radius: 50% !important;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+/* 2. Worker Queues: Congested (Amber styling) */
+.flex.gap-6 > div.w-\[280px\] p:nth-of-type(2) span {
+    background-color: #fffbeb !important;
+    color: #d97706 !important;
+    border-color: #fef3c7 !important;
+    font-size: 0 !important;
+}
+.flex.gap-6 > div.w-\[280px\] p:nth-of-type(2) span::after {
+    content: "Congested" !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+}
+.flex.gap-6 > div.w-\[280px\] p:nth-of-type(2) span::before {
+    background-color: #f59e0b !important;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+
+/* 5. Image CDN: Operational */
+.flex.gap-6 > div.w-\[280px\] p:nth-of-type(5) span {
+    font-size: 0 !important;
+}
+.flex.gap-6 > div.w-\[280px\] p:nth-of-type(5) span::after {
+    content: "Operational" !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+}
+
+/* Divider Line above button */
+.flex.gap-6 > div.w-\[280px\] p:nth-of-type(5) {
+    border-bottom: 1px solid #f1f5f9 !important;
+    padding-bottom: 24px !important;
+    margin-bottom: 24px !important;
+}
+
+/* Action Button styling */
+.flex.gap-6 > div.w-\[280px\] button {
+    margin-top: auto !important; /* Push to bottom */
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 10px 16px !important;
+    color: #475569 !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    background-color: white !important;
+    box-shadow: none !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+.flex.gap-6 > div.w-\[280px\] button:hover {
+    background-color: #f8fafc !important;
+    border-color: #cbd5e1 !important;
 }

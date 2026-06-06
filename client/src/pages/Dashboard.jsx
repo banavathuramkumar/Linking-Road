@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import Sidebar from "../components/Sidebar";
 import {
   HiMenu,
@@ -16,6 +17,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [slowDownMode, setSlowDownMode] = useState(false);
+  const [hoveredPoint, setHoveredPoint] = useState(null);
 
   // Load custom premium Google Font dynamically
   useEffect(() => {
@@ -83,9 +85,9 @@ const Dashboard = () => {
   const chartHeight = 240;
   const paddingLeft = 45;
   const paddingRight = 20;
-  const paddingTop = 25;
-  const paddingBottom = 35;
-  const maxY = 100; // Normalized scale for engagement/activity percentage
+  const paddingTop = 15;
+  const paddingBottom = 45;
+  const maxY = 600; // Normalized scale for engagement/activity percentage
 
   const getCoordinates = (index, value) => {
     const x = paddingLeft + (index * (chartWidth - paddingLeft - paddingRight)) / (chartData.length - 1);
@@ -232,145 +234,296 @@ const Dashboard = () => {
         {/* Middle Section: Chart + Side Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
           {/* Performance Overview Chart Card */}
-          <div className="lg:col-span-2 bg-white border border-slate-100 rounded-3xl p-6 sm:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] flex flex-col justify-between">
+          <div className="lg:col-span-2 bg-white border border-slate-100/90 rounded-3xl p-6 sm:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-2">
-                <h2 className="text-xl font-bold text-slate-900 font-['ClashDisplay']">
+                <h2 className="text-xl font-bold text-slate-900">
                   Performance Overview
                 </h2>
-                <span className="text-[11px] font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full uppercase tracking-wider">
-                  Live
-                </span>
               </div>
               <p className="text-slate-400 text-xs sm:text-sm mb-6">
-                Lead generation engagement index and activity flow tracker.
+                Lead generation and message activity
               </p>
             </div>
 
             {/* SVG Chart Wrapper */}
-            <div className="w-full relative h-[250px] overflow-hidden rounded-2xl bg-slate-50/50 p-2 sm:p-4 border border-slate-50">
+            <div className="w-full relative h-[350px] overflow-hidden p-2">
               <svg className="w-full h-full" viewBox={`0 0 ${chartWidth} ${chartHeight}`} preserveAspectRatio="none">
                 <defs>
                   <linearGradient id="purpleArea" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#6366F1" stopOpacity="0.25" />
-                    <stop offset="100%" stopColor="#6366F1" stopOpacity="0.00" />
+                    <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.25" />
+                    <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.00" />
                   </linearGradient>
                 </defs>
 
-                {/* Grid Lines */}
-                {[0, 25, 50, 75, 100].map((val) => {
-                  const y = getCoordinates(0, val).y;
+                {/* Horizontal Dotted Grid Lines */}
+                {[150, 300, 450, 600].map((val) => {
+                  const { y } = getCoordinates(0, val);
                   return (
-                    <g key={val}>
-                      <line
-                        x1={paddingLeft}
-                        y1={y}
-                        x2={chartWidth - paddingRight}
-                        y2={y}
-                        stroke="#E2E8F0"
-                        strokeWidth="0.8"
-                        strokeDasharray="4,6"
-                      />
-                      <text
-                        x={paddingLeft - 12}
-                        y={y + 4}
-                        textAnchor="end"
-                        fill="#94A3B8"
-                        fontSize="10"
-                        fontWeight="600"
-                      >
-                        {val}%
-                      </text>
-                    </g>
+                    <line
+                      key={val}
+                      x1={paddingLeft}
+                      y1={y}
+                      x2={chartWidth - paddingRight}
+                      y2={y}
+                      stroke="#F1F5F9"
+                      strokeWidth="1"
+                      strokeDasharray="2,4"
+                      strokeLinecap="round"
+                    />
+                  );
+                })}
+
+                {/* Vertical Dotted Grid Lines */}
+                {chartData.slice(1).map((point, idx) => {
+                  const { x } = getCoordinates(idx + 1, 0);
+                  return (
+                    <line
+                      key={point.day}
+                      x1={x}
+                      y1={paddingTop}
+                      x2={x}
+                      y2={chartHeight - paddingBottom}
+                      stroke="#F1F5F9"
+                      strokeWidth="1"
+                      strokeDasharray="2,4"
+                      strokeLinecap="round"
+                    />
+                  );
+                })}
+
+                {/* Solid Y Axis Line */}
+                <line
+                  x1={paddingLeft}
+                  y1={paddingTop}
+                  x2={paddingLeft}
+                  y2={chartHeight - paddingBottom}
+                  stroke="#CBD5E1"
+                  strokeWidth="1.5"
+                />
+
+                {/* Solid X Axis Line */}
+                <line
+                  x1={paddingLeft}
+                  y1={chartHeight - paddingBottom}
+                  x2={chartWidth - paddingRight}
+                  y2={chartHeight - paddingBottom}
+                  stroke="#CBD5E1"
+                  strokeWidth="1.5"
+                />
+
+                {/* Y Axis Ticks */}
+                {[0, 150, 300, 450, 600].map((val) => {
+                  const { y } = getCoordinates(0, val);
+                  return (
+                    <line
+                      key={`y-tick-${val}`}
+                      x1={paddingLeft - 6}
+                      y1={y}
+                      x2={paddingLeft}
+                      y2={y}
+                      stroke="#CBD5E1"
+                      strokeWidth="1.5"
+                    />
+                  );
+                })}
+
+                {/* X Axis Ticks */}
+                {chartData.map((pt, idx) => {
+                  const { x } = getCoordinates(idx, 0);
+                  return (
+                    <line
+                      key={`x-tick-${pt.day}`}
+                      x1={x}
+                      y1={chartHeight - paddingBottom}
+                      x2={x}
+                      y2={chartHeight - paddingBottom + 6}
+                      stroke="#CBD5E1"
+                      strokeWidth="1.5"
+                    />
+                  );
+                })}
+
+                {/* Y Axis Labels */}
+                {[0, 150, 300, 450, 600].map((val) => {
+                  const { y } = getCoordinates(0, val);
+                  return (
+                    <text
+                      key={`y-label-${val}`}
+                      x={paddingLeft - 12}
+                      y={y + 4}
+                      textAnchor="end"
+                      fill="#94A3B8"
+                      fontSize="11"
+                      fontWeight="500"
+                    >
+                      {val}
+                    </text>
+                  );
+                })}
+
+                {/* X Axis Labels */}
+                {chartData.map((pt, idx) => {
+                  const { x } = getCoordinates(idx, 0);
+                  return (
+                    <text
+                      key={`x-label-${pt.day}`}
+                      x={x}
+                      y={chartHeight - paddingBottom + 22}
+                      textAnchor="middle"
+                      fill="#94A3B8"
+                      fontSize="11"
+                      fontWeight="500"
+                    >
+                      {pt.day}
+                    </text>
                   );
                 })}
 
                 {/* Smooth Area Gradient */}
-                <path d={areaD} fill="url(#purpleArea)" />
+                <motion.path
+                  d={areaD}
+                  fill="url(#purpleArea)"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1.2, delay: 0.5, ease: "easeOut" }}
+                />
 
                 {/* Stroke Line */}
-                <path d={pathD} fill="none" stroke="#6366F1" strokeWidth="3.5" strokeLinecap="round" />
+                <motion.path
+                  d={pathD}
+                  fill="none"
+                  stroke="#8B5CF6"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                />
 
-                {/* Data Points Dot markers */}
+                {/* Vertical Dotted Cursor Line when hovering */}
+                {hoveredPoint && (
+                  <line
+                    x1={hoveredPoint.x}
+                    y1={paddingTop}
+                    x2={hoveredPoint.x}
+                    y2={chartHeight - paddingBottom}
+                    stroke="#CBD5E1"
+                    strokeWidth="1.5"
+                  />
+                )}
+
+                {/* Active hover dot marker */}
+                {hoveredPoint && (
+                  <circle
+                    cx={hoveredPoint.x}
+                    cy={hoveredPoint.y}
+                    r="5"
+                    fill="#8B5CF6"
+                    stroke="#FFFFFF"
+                    strokeWidth="2"
+                  />
+                )}
+
+                {/* Invisible vertical hover zones for each day */}
                 {chartData.map((pt, idx) => {
                   const { x, y } = getCoordinates(idx, pt.val);
+                  const step = (chartWidth - paddingLeft - paddingRight) / (chartData.length - 1);
                   return (
-                    <g key={idx} className="group cursor-pointer">
-                      <circle
-                        cx={x}
-                        cy={y}
-                        r="6"
-                        fill="#6366F1"
-                        stroke="#FFFFFF"
-                        strokeWidth="2.5"
-                        className="transition-all duration-300 hover:r-8 hover:fill-indigo-800"
-                      />
-                      <circle
-                        cx={x}
-                        cy={y}
-                        r="12"
-                        fill="#6366F1"
-                        fillOpacity="0.1"
-                        className="opacity-0 group-hover:opacity-100 transition-all duration-300"
-                      />
-                    </g>
+                    <rect
+                      key={`hover-zone-${idx}`}
+                      x={x - step / 2}
+                      y={paddingTop}
+                      width={step}
+                      height={chartHeight - paddingTop - paddingBottom}
+                      fill="transparent"
+                      className="cursor-pointer"
+                      onMouseEnter={() => setHoveredPoint({ ...pt, x, y, index: idx })}
+                      onMouseLeave={() => setHoveredPoint(null)}
+                    />
                   );
                 })}
               </svg>
 
-              {/* X Labels */}
-              <div className="absolute left-[48px] right-[20px] bottom-2.5 flex justify-between text-[11px] font-bold text-slate-400">
-                {chartData.map((pt) => (
-                  <span key={pt.day} className="w-10 text-center">
-                    {pt.day}
-                  </span>
-                ))}
-              </div>
+              {/* Tooltip Overlay */}
+              {hoveredPoint && (
+                <div
+                  className="absolute bg-white border border-[#ccc] text-[14px] p-2.5 pointer-events-none transition-all duration-75 text-left font-sans"
+                  style={{
+                    left: `${(hoveredPoint.x / chartWidth) * 100}%`,
+                    top: `${(hoveredPoint.y / chartHeight) * 100}%`,
+                    transform: hoveredPoint.index > 3 ? "translate(-112%, -50%)" : "translate(12px, -50%)",
+                    whiteSpace: "nowrap"
+                  }}
+                >
+                  <p className="m-0 text-slate-800 font-medium">{hoveredPoint.day}</p>
+                  <ul className="p-0 m-0 list-none">
+                    <li className="flex items-center gap-1.5 py-1 text-[#8B5CF6] font-medium">
+                      <span 
+                        className="inline-block w-2.5 h-2.5" 
+                        style={{ backgroundColor: "#8B5CF6" }}
+                      />
+                      <span>value : {hoveredPoint.val}</span>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
 
           {/* Right Cards Stack */}
           <div className="flex flex-col gap-6">
             {/* Queue Status */}
-            <div className="bg-white border border-slate-100 rounded-3xl p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] flex-1 flex flex-col justify-between">
+            <div className="bg-white border border-slate-100 rounded-3xl p-6 sm:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] flex-1 flex flex-col justify-between">
               <div>
-                <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-5">
-                  Queue Activity Status
-                </h3>
+                <h2 className="text-xl font-bold text-slate-900 mb-6">
+                  Queue Status
+                </h2>
 
                 {/* Processing DMs */}
-                <div className="mb-5">
-                  <div className="flex justify-between items-center text-xs font-bold mb-2">
-                    <span className="text-slate-600">Processing DMs</span>
-                    <span className="text-slate-950">845 / 1,000</span>
+                <div className="mb-6">
+                  <div className="flex justify-between items-center text-sm font-semibold mb-2">
+                    <span className="text-slate-500">Processing DMs</span>
+                    <span className="text-slate-900 font-bold">845 / 1,000</span>
                   </div>
-                  <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                    <div className="h-full bg-indigo-600 rounded-full" style={{ width: "84.5%" }} />
+                  <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                    <motion.div
+                      className="h-full bg-purple-600 rounded-full"
+                      initial={{ width: 0 }}
+                      animate={{ width: "84.5%" }}
+                      transition={{ duration: 1.2, ease: "easeOut" }}
+                    />
                   </div>
                 </div>
 
                 {/* API Rate Limit */}
                 <div className="mb-6">
-                  <div className="flex justify-between items-center text-xs font-bold mb-2">
-                    <span className="text-slate-600">API Rate Limit Usage</span>
-                    <span className="text-slate-950">12%</span>
+                  <div className="flex justify-between items-center text-sm font-semibold mb-2">
+                    <span className="text-slate-500">API Rate Limit</span>
+                    <span className="text-slate-900 font-bold">12% Usage</span>
                   </div>
-                  <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                    <div className="h-full bg-emerald-500 rounded-full" style={{ width: "12%" }} />
+                  <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                    <motion.div
+                      className="h-full bg-emerald-500 rounded-full"
+                      initial={{ width: 0 }}
+                      animate={{ width: "12%" }}
+                      transition={{ duration: 1.2, ease: "easeOut" }}
+                    />
                   </div>
                 </div>
               </div>
 
               {/* Slow Down Switch */}
-              <div className="flex items-center justify-between border-t border-slate-100 pt-4 mt-2">
+              <div className="flex items-center justify-between border-t border-slate-100 pt-6 mt-2">
                 <div>
-                  <h4 className="text-xs font-bold text-slate-800">Slow Down Mode</h4>
-                  <p className="text-[10px] text-slate-400 mt-0.5">Limits automation dispatch speed</p>
+                  <h4 className="text-sm font-bold text-slate-900">Slow Down Mode</h4>
+                  <p className="text-xs text-slate-400 mt-0.5">Limits execution speed</p>
                 </div>
                 <button
                   onClick={handleSlowDownToggle}
                   className={`w-11 h-6 rounded-full p-1 transition-all duration-300 relative ${
-                    slowDownMode ? "bg-indigo-600" : "bg-slate-200"
+                    slowDownMode ? "bg-purple-600" : "bg-slate-200"
                   }`}
                 >
                   <div
@@ -384,21 +537,20 @@ const Dashboard = () => {
 
             {/* Pro Plan Box */}
             <div className="bg-[#EEF2FF] rounded-3xl p-6 flex flex-col justify-between h-[165px] border border-indigo-100 shadow-sm relative overflow-hidden">
-              <div className="absolute right-0 top-0 translate-x-4 -translate-y-4 opacity-5 text-indigo-900 text-9xl font-black select-none pointer-events-none">PRO</div>
               <div>
-                <div className="flex items-center gap-1.5 text-indigo-700 mb-2">
-                  <HiOutlineLightningBolt className="w-4 h-4 fill-indigo-100" />
-                  <span className="text-xs font-bold uppercase tracking-wider">Pro Plan Activated</span>
+                <div className="flex items-center gap-1.5 text-indigo-700 mb-2 font-semibold">
+                  <HiOutlineLightningBolt className="w-5 h-5 text-purple-600 fill-purple-100" />
+                  <span className="text-sm font-bold text-indigo-900">Pro Plan Active</span>
                 </div>
-                <p className="text-xs text-indigo-600/90 leading-relaxed font-semibold">
-                  You have consumed 45% of your monthly interaction quota.
+                <p className="text-xs text-indigo-700 leading-relaxed font-semibold">
+                  You have used 45% of your monthly interaction quota.
                 </p>
               </div>
 
               {/* Manage Billing Action Button */}
               <button
                 onClick={() => navigate("/billing")}
-                className="w-full bg-white hover:bg-slate-50 active:scale-[0.99] transition-all py-3 rounded-xl text-xs font-bold text-indigo-600 shadow-sm cursor-pointer text-center"
+                className="w-full bg-white hover:bg-indigo-50/50 active:scale-[0.99] transition-all py-3 rounded-2xl text-xs font-bold text-indigo-700 shadow-sm border border-indigo-100/50 cursor-pointer text-center"
               >
                 Manage Billing
               </button>

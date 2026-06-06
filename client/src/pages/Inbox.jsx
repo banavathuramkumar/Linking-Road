@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Inbox.css";
 import ProfileInbox from "./Profile-inbox";
 import Sidebar from "../components/Sidebar";
@@ -58,6 +60,8 @@ function Inbox() {
   const [dynamicMsgs, setDynamicMsgs] = useState([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const popularEmojis = ["😊", "😂", "👍", "❤️", "🔥", "🎉", "👀", "🤔", "💡", "✨"];
 
 
   const getTime = () => {
@@ -81,12 +85,38 @@ function Inbox() {
     }, 1000);
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      toast.success(`Selected file: ${file.name}`);
+      const fileMsg = {
+        id: Date.now(),
+        text: `📎 Attached file: ${file.name}`,
+        side: "right",
+        time: getTime()
+      };
+      setDynamicMsgs(prev => [...prev, fileMsg]);
+      
+      // Simulate automatic response to attachment
+      setTimeout(() => {
+        const replyMsg = {
+          id: Date.now() + 1,
+          text: `Received file: ${file.name}. Processing attachment...`,
+          side: "left",
+          time: getTime()
+        };
+        setDynamicMsgs(prev => [...prev, replyMsg]);
+      }, 1000);
+    }
+  };
+
   return (
     <div className="flex min-h-screen bg-[#F8FAFC] overflow-x-hidden text-slate-800">
       {/* Sidebar Component */}
       <Sidebar mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
+      <ToastContainer position="top-right" autoClose={2000} hideProgressBar />
 
-      <div className={`inbox-page ${isChatOpen ? "chat-open" : ""}`}>
+      <div className={`inbox-page ${isChatOpen ? "chat-open" : ""} ${showProfile ? "profile-open" : ""}`}>
         <div className="conversation">
           {/* Mobile menu trigger */}
           <div className="conversation-header lg:hidden flex items-center p-3 border-b border-slate-100 bg-white">
@@ -232,7 +262,16 @@ function Inbox() {
           </div>
 
           <div className="send-box">
-            <FiPaperclip />
+            <label htmlFor="file-upload" className="cursor-pointer flex items-center justify-center text-slate-500 hover:text-indigo-600 transition-colors">
+              <FiPaperclip className="w-5 h-5" />
+            </label>
+            <input
+              type="file"
+              id="file-upload"
+              className="hidden"
+              style={{ display: "none" }}
+              onChange={handleFileChange}
+            />
             <input
               placeholder="Type a message..."
               value={msgText}
@@ -241,7 +280,28 @@ function Inbox() {
                 if (e.key === "Enter") sendMessage();
               }}
             />
-            <FiSmile />
+            <div className="relative flex items-center">
+              <FiSmile 
+                className="cursor-pointer text-slate-500 hover:text-indigo-600 transition-colors w-5 h-5" 
+                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+              />
+              {showEmojiPicker && (
+                <div className="absolute bottom-full right-0 mb-2 bg-white border border-slate-200 rounded-2xl p-2.5 shadow-lg flex gap-2 z-50">
+                  {popularEmojis.map((emoji) => (
+                    <button
+                      key={emoji}
+                      onClick={() => {
+                        setMsgText(prev => prev + emoji);
+                        setShowEmojiPicker(false);
+                      }}
+                      className="hover:scale-125 transition-transform duration-100 text-lg cursor-pointer p-1"
+                    >
+                      {emoji}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
 
             <button onClick={sendMessage}>
               <FiSend />
@@ -251,10 +311,17 @@ function Inbox() {
         </div>
 
         {showProfile && (
-          <ProfileInbox
-            user={selected}
-            close={() => setShowProfile(false)}
-          />
+          <>
+            <div 
+              className="fixed inset-0 bg-slate-900/25 backdrop-blur-[6px] z-40 transition-all duration-300 cursor-pointer"
+              onClick={() => setShowProfile(false)}
+              aria-hidden="true"
+            />
+            <ProfileInbox
+              user={selected}
+              close={() => setShowProfile(false)}
+            />
+          </>
         )}
       </div>
     </div>

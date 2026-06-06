@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./Profile-inbox.css";
 
 import {
@@ -22,6 +23,19 @@ function Profile({user, close}){
                 name === "Mike Chen" ? "+1 (555) 019-5821" : 
                 name === "Emma Wilson" ? "+1 (555) 019-9432" : 
                 name === "Alex Kumar" ? "+1 (555) 019-1104" : "+1 (555) 019-0000";
+
+  const [tags, setTags] = useState(["Hot Lead", "Creator"]);
+  const [isAddingTag, setIsAddingTag] = useState(false);
+  const [newTagText, setNewTagText] = useState("");
+
+  const handleAddTag = () => {
+    const trimmed = newTagText.trim();
+    if (trimmed && !tags.includes(trimmed)) {
+      setTags([...tags, trimmed]);
+    }
+    setNewTagText("");
+    setIsAddingTag(false);
+  };
 
   return(
     <div className="profile-page">
@@ -75,9 +89,39 @@ function Profile({user, close}){
         </div>
 
         <div className="tags">
-          <button>Hot Lead</button>
-          <button>Creator</button>
-          <button className="add-tag">+</button>
+          {tags.map((tag) => (
+            <button key={tag}>{tag}</button>
+          ))}
+          {isAddingTag ? (
+            <div className="flex items-center gap-1">
+              <input
+                type="text"
+                value={newTagText}
+                onChange={(e) => setNewTagText(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleAddTag();
+                  if (e.key === "Escape") { setIsAddingTag(false); setNewTagText(""); }
+                }}
+                className="border border-[#e2e8f0] rounded-lg px-2 py-1 text-xs outline-none bg-white font-semibold text-slate-700 w-20"
+                placeholder="Tag..."
+                autoFocus
+              />
+              <button 
+                onClick={handleAddTag} 
+                className="bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold px-2 py-1 rounded-md cursor-pointer"
+              >
+                Add
+              </button>
+              <button 
+                onClick={() => { setIsAddingTag(false); setNewTagText(""); }} 
+                className="bg-slate-100 hover:bg-slate-200 text-slate-500 text-[11px] font-bold px-2 py-1 rounded-md cursor-pointer"
+              >
+                X
+              </button>
+            </div>
+          ) : (
+            <button className="add-tag" onClick={() => setIsAddingTag(true)}>+</button>
+          )}
         </div>
 
         <div className="section-title">
