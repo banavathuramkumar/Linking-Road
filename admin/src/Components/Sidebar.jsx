@@ -30,7 +30,7 @@ const Sidebar = () => {
     <aside className="w-[280px] h-screen bg-white border-r-[0.8px] border-[#E2E8F0] shadow-[4px_0px_24px_0px_#00000005] flex flex-col shrink-0">
       {/* LOGO */}
 
-      <div className="h-[64px] px-6 flex items-center border-b-[0.8px] border-[#F1F5F9] shrink-0">
+      <div className="h-[60px] px-6 flex items-center border-b-[0.8px] border-[#F1F5F9] shrink-0">
         <div className="flex items-center gap-2 font-bold text-[22px] tracking-wider">
           <img src="/logo-text.png" alt="logo" className="w-[150px] h-auto" />
         </div>

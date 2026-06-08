@@ -201,7 +201,7 @@ function Analytics() {
             </div>
             <div>
               <h3>
-                FlowPilot AI Insights
+                LINKINGROAD AI Insights
                 <span>NEW</span>
               </h3>
               <div className="ai-text">
