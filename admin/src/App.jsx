@@ -5,10 +5,10 @@ import Dashboard from "./Pages/Dashboard";
 import Users from "./Pages/Users";
 import Moderation from "./Pages/Moderation";
 import Billing from "./Pages/Billing";
-import Support from "./Pages/Support";
 import AuditLogs from "./pages/AuditLogs"
 import SubscriptionPackages from "./pages/SubscriptionPackages";
 import Infrastructure from "./pages/Infrastructure";
+import Support from "./pages/Support";
 
 function AdminLayout() {
   return (
@@ -33,7 +33,7 @@ function App() {
         <Route path="/moderation" element={<Moderation />} />
         <Route path="/billing" element={<Billing />} />
         <Route path="/infrastructure" element={<Infrastructure />} />
-        <Route path="/support" element={<Support />} />
+        <Route path="/support" element={ <Support /> } />
         <Route path="/audit-logs" element={ <AuditLogs /> } />
         <Route path="/subscription-packages" element={<SubscriptionPackages />} />
       </Route>
