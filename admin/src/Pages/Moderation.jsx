@@ -44,7 +44,7 @@ const Moderation = () => {
   };
 
   return (
-    <div className="p-8 space-y-8">
+    <div className="p-4 sm:p-8 space-y-6 sm:space-y-8">
       
       {/* Top stats cards section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
@@ -84,10 +84,9 @@ const Moderation = () => {
 
       </div>
 
-      {/* Flagged Content Queue section */}
-      <div className="rounded-[24px] p-8 bg-white border border-slate-100 shadow-sm flex flex-col gap-6">
+      <div className="rounded-[24px] p-4 sm:p-8 bg-white border border-slate-100 shadow-sm flex flex-col gap-6">
         
-        <div className="flex justify-between items-start">
+        <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
           <div>
             <h1 className="font-bold text-xl text-slate-800">
               Flagged Content Queue
@@ -111,7 +110,7 @@ const Moderation = () => {
             </div>
           ) : (
             flaggedItems.map((item) => (
-              <div key={item.id} className="w-full bg-[#F8FAFC] border-t border-[#F1F5F9] rounded-[16px] p-4 flex gap-4">
+              <div key={item.id} className="w-full bg-[#F8FAFC] border-t border-[#F1F5F9] rounded-[16px] p-4 flex flex-col sm:flex-row gap-4">
                 <div className="w-10 h-10 rounded-full bg-[#FEF3C7] text-[#D97706] flex items-center justify-center shrink-0">
                   <FiAlertTriangle className="w-5 h-5" />
                 </div>

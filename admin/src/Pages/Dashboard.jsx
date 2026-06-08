@@ -75,7 +75,7 @@ const Dashboard = () => {
 
   return (
 
-<div className="p-8 space-y-8">
+<div className="p-4 sm:p-8 space-y-6 sm:space-y-8">
 
 
 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -131,7 +131,7 @@ className="rounded-[24px] p-6 bg-white border border-slate-100 shadow-[0_4px_20p
 
 
 
-<div className="flex gap-6">
+<div className="flex flex-col lg:flex-row gap-6">
 
 
 <div className="flex-1 min-w-0 rounded-[24px] p-8 bg-white shadow flex flex-col">
@@ -378,7 +378,7 @@ MRR performance over last 30 days
 
 
 
-<div className="w-[280px] shrink-0 rounded-[24px] p-8 bg-white shadow">
+<div className="w-full lg:w-[280px] lg:shrink-0 rounded-[24px] p-8 bg-white shadow">
 
 
 <h2 className="text-xl font-bold mb-8">
@@ -429,10 +429,10 @@ View Detailed Health
 
 
 
-<div className="rounded-[24px] p-8 bg-white border border-slate-100 shadow-sm flex flex-col gap-6">
+<div className="rounded-[24px] p-4 sm:p-8 bg-white border border-slate-100 shadow-sm flex flex-col gap-6">
 
 
-<div className="flex justify-between items-start">
+<div className="flex flex-col sm:flex-row justify-between items-start gap-4">
   <div>
     <h1 className="font-bold text-xl text-slate-800">
       Feature Flags & Beta Controls

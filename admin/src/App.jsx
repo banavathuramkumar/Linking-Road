@@ -5,10 +5,10 @@ import Dashboard from "./Pages/Dashboard";
 import Users from "./Pages/Users";
 import Moderation from "./Pages/Moderation";
 import Billing from "./Pages/Billing";
-import AuditLogs from "./pages/AuditLogs"
-import SubscriptionPackages from "./pages/SubscriptionPackages";
-import Infrastructure from "./pages/Infrastructure";
-import Support from "./pages/Support";
+import AuditLogs from "./Pages/AuditLogs"
+import SubscriptionPackages from "./Pages/SubscriptionPackages";
+import Infrastructure from "./Pages/Infrastructure";
+import Support from "./Pages/Support";
 
 function AdminLayout() {
   return (
