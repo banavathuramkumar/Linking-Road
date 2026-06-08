@@ -73,7 +73,7 @@ const Topbar = () => {
   };
 
   return (
-    <div className="w-full h-[72px] bg-white border-b border-slate-100 px-8 flex items-center justify-end gap-6 shrink-0 relative z-40">
+    <div className="w-full h-[60px] bg-white border-b border-slate-100 px-8 flex items-center justify-end gap-6 shrink-0 relative z-40">
       
       {/* Search Section */}
       <div className="relative w-80" ref={searchRef}>
