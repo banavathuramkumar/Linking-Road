@@ -358,9 +358,9 @@ function SubscriptionPackages() {
   };
 
   return (
-    <div className="w-full max-w-[1180px] mx-auto p-7 relative">
+    <div className="w-full max-w-[1180px] mx-auto p-4 sm:p-7 relative">
       {/* Header section */}
-      <div className="flex justify-between items-center mb-8 w-full">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 w-full">
         <div className="flex flex-col gap-1">
           <h1 className="text-[#0F172B] font-['Clash_Display',sans-serif] font-semibold text-2xl leading-8 tracking-[0px] m-0">
             Subscription Packages
@@ -369,9 +369,9 @@ function SubscriptionPackages() {
             Configure plans, features, and pricing visible to customers
           </p>
         </div>
-        <div className="flex gap-3 items-center">
+        <div className="flex flex-wrap gap-3 items-center w-full md:w-auto justify-start md:justify-end">
           {publishMessage && (
-            <span className="text-[#10B981] font-['General_Sans',sans-serif] text-sm font-semibold">
+            <span className="text-[#10B981] font-['General_Sans',sans-serif] text-sm font-semibold w-full md:w-auto mb-1 md:mb-0">
               {publishMessage}
             </span>
           )}
@@ -626,8 +626,8 @@ function SubscriptionPackages() {
 
       {/* CREATE NEW PLAN MODAL */}
       {isCreateOpen && (
-        <div className="fixed inset-0 bg-[#0F172B]/40 backdrop-blur-md flex items-center justify-center z-[1000]">
-          <div className="bg-white rounded-[24px] shadow-2xl w-full max-h-[90vh] flex flex-col overflow-hidden max-w-[540px] box-border">
+        <div className="fixed inset-0 bg-[#0F172B]/40 backdrop-blur-md flex items-center justify-center z-[1000] p-4">
+          <div className="bg-white rounded-[24px] shadow-2xl w-[calc(100%-32px)] sm:w-full max-h-[90vh] flex flex-col overflow-hidden max-w-[540px] box-border mx-4 sm:mx-0">
             <div className="p-6 border-b border-[#F1F5F9] flex items-center justify-between">
               <h2 className="flex items-center gap-2 font-['Clash_Display',sans-serif] font-semibold text-xl text-[#0F172B]">
                 Create New Plan
@@ -640,7 +640,7 @@ function SubscriptionPackages() {
               </div>
             </div>
 
-            <div className="p-6 overflow-y-auto flex-grow flex flex-col gap-5">
+            <div className="p-6 overflow-y-auto overflow-x-hidden flex-grow flex flex-col gap-5">
               {/* Start From */}
               <div className="flex flex-col gap-1.5">
                 <label className="font-['General_Sans',sans-serif] font-semibold text-xs text-[#314158]">
@@ -698,7 +698,7 @@ function SubscriptionPackages() {
               </div>
 
               {/* Price & Color */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
                   <label className="font-['General_Sans',sans-serif] font-semibold text-xs text-[#314158]">
                     Monthly Price ($)
@@ -772,8 +772,8 @@ function SubscriptionPackages() {
 
       {/* EDIT PLAN MODAL */}
       {editingPlan && editForm && (
-        <div className="fixed inset-0 bg-[#0F172B]/40 backdrop-blur-md flex items-center justify-center z-[1000]">
-          <div className="bg-white rounded-[24px] shadow-2xl w-full max-h-[90vh] flex flex-col overflow-hidden max-w-[620px] box-border">
+        <div className="fixed inset-0 bg-[#0F172B]/40 backdrop-blur-md flex items-center justify-center z-[1000] p-4">
+          <div className="bg-white rounded-[24px] shadow-2xl w-[calc(100%-32px)] sm:w-full max-h-[90vh] flex flex-col overflow-hidden max-w-[620px] box-border mx-4 sm:mx-0">
             <div className="p-6 border-b border-[#F1F5F9] flex items-center justify-between">
               <h2 className="flex items-center gap-2 font-['Clash_Display',sans-serif] font-semibold text-xl text-[#0F172B]">
                 <span
@@ -790,12 +790,12 @@ function SubscriptionPackages() {
               </div>
             </div>
 
-            <div className="p-6 overflow-y-auto flex-grow flex flex-col gap-5">
+            <div className="p-6 overflow-y-auto overflow-x-hidden flex-grow flex flex-col gap-5">
               {/* SECTION: IDENTITY */}
               <h4 className="font-['General_Sans',sans-serif] font-bold text-[11px] tracking-wider text-[#94A3B8] uppercase mt-2 mb-0.5">
                 Identity
               </h4>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
                   <label className="font-['General_Sans',sans-serif] font-semibold text-xs text-[#314158]">
                     Plan Name
@@ -864,7 +864,7 @@ function SubscriptionPackages() {
               <h4 className="font-['General_Sans',sans-serif] font-bold text-[11px] tracking-wider text-[#94A3B8] uppercase mt-2 mb-0.5">
                 Pricing
               </h4>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
                   <label className="font-['General_Sans',sans-serif] font-semibold text-xs text-[#314158]">
                     Monthly Price ($)
@@ -906,7 +906,7 @@ function SubscriptionPackages() {
               <h4 className="font-['General_Sans',sans-serif] font-bold text-[11px] tracking-wider text-[#94A3B8] uppercase mt-2 mb-0.5">
                 Limits & Trial
               </h4>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
                   <label className="font-['General_Sans',sans-serif] font-semibold text-xs text-[#314158]">
                     Seats
@@ -927,7 +927,7 @@ function SubscriptionPackages() {
                     />
                     <button
                       type="button"
-                      className={`h-[41.6px] border border-[#E2E8F0] bg-white font-['General_Sans',sans-serif] font-semibold text-xs text-[#62748E] py-2 px-3 rounded-xl cursor-pointer flex items-center justify-center gap-1.5 transition-all outline-none ${editForm.unlimitedSeats ? "border-[#4F39F6] bg-[#EEF2FF] text-[#4F39F6]" : ""}`}
+                      className={`h-[41.6px] border border-[#E2E8F0] bg-white font-['General_Sans',sans-serif] font-semibold text-xs text-[#62748E] py-2 px-3 rounded-xl cursor-pointer flex items-center justify-center gap-1.5 transition-all outline-none peer-checked:bg-[#EEF2FF] ${editForm.unlimitedSeats ? "border-[#4F39F6] bg-[#EEF2FF] text-[#4F39F6]" : ""}`}
                       onClick={() =>
                         setEditForm({
                           ...editForm,
@@ -975,10 +975,10 @@ function SubscriptionPackages() {
                 {editForm.features.map((f) => (
                   <div
                     key={f.id}
-                    className={`flex items-center gap-3 p-[10px_14px] border border-[#E2E8F0] rounded-xl bg-white transition-all ${!f.enabled ? "bg-[#F8FAFC] opacity-75" : ""}`}
+                    className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 p-3.5 sm:p-[10px_14px] border border-[#E2E8F0] rounded-xl bg-white transition-all ${!f.enabled ? "bg-[#F8FAFC] opacity-75" : ""}`}
                   >
-                    <div className="flex items-center">
-                      <label className="relative inline-block w-11 h-6 cursor-pointer">
+                    <div className="flex items-center gap-3 flex-1 w-full">
+                      <label className="relative inline-block w-11 h-6 cursor-pointer shrink-0">
                         <input
                           type="checkbox"
                           className="opacity-0 w-0 h-0 peer"
@@ -987,35 +987,37 @@ function SubscriptionPackages() {
                         />
                         <span className="absolute inset-0 bg-[#E2E8F0] rounded-3xl transition-all duration-300 peer-checked:bg-[#4F39F6] after:content-[''] after:absolute after:h-4.5 after:w-4.5 after:left-[3px] after:bottom-[3px] after:bg-white after:rounded-full after:transition-all after:duration-300 after:shadow peer-checked:after:translate-x-5"></span>
                       </label>
-                    </div>
 
-                    <input
-                      type="text"
-                      className={`flex-grow border-none font-['General_Sans',sans-serif] text-[13px] font-medium text-[#45556C] bg-transparent p-0 focus:outline-none ${!f.enabled ? "text-[#94A3B8] line-through" : ""}`}
-                      value={f.text}
-                      disabled={!f.enabled}
-                      onChange={(e) =>
-                        handleEditFeatureText(f.id, e.target.value)
-                      }
-                    />
-
-                    {f.enabled && (
                       <input
                         type="text"
-                        className="border border-[#E2E8F0] rounded-lg py-1 px-2 font-['General_Sans',sans-serif] text-xs text-[#0F172B] w-[100px] text-right bg-[#FCFDFE] focus:outline-none focus:border-[#4F39F6]"
-                        placeholder="e.g. 1 account"
-                        value={f.value || ""}
+                        className={`flex-grow w-full min-w-0 border-none font-['General_Sans',sans-serif] text-[13px] font-medium text-[#45556C] bg-transparent p-0 focus:outline-none ${!f.enabled ? "text-[#94A3B8] line-through" : ""}`}
+                        value={f.text}
+                        disabled={!f.enabled}
                         onChange={(e) =>
-                          handleEditFeatureValue(f.id, e.target.value)
+                          handleEditFeatureText(f.id, e.target.value)
                         }
                       />
-                    )}
+                    </div>
 
-                    <div
-                      className="text-[#94A3B8] cursor-pointer flex items-center justify-center p-0.5 rounded hover:text-[#EF4444] hover:bg-[#FEF2F2] transition-all"
-                      onClick={() => handleDeleteFeature(f.id)}
-                    >
-                      <FiX size={14} />
+                    <div className="flex items-center gap-3 justify-between sm:justify-end w-full sm:w-auto border-t border-[#F1F5F9] sm:border-t-0 pt-2 sm:pt-0">
+                      {f.enabled && (
+                        <input
+                          type="text"
+                          className="border border-[#E2E8F0] rounded-lg py-1 px-2 font-['General_Sans',sans-serif] text-xs text-[#0F172B] w-[120px] text-right bg-[#FCFDFE] focus:outline-none focus:border-[#4F39F6] sm:w-[100px]"
+                          placeholder="e.g. 1 account"
+                          value={f.value || ""}
+                          onChange={(e) =>
+                            handleEditFeatureValue(f.id, e.target.value)
+                          }
+                        />
+                      )}
+
+                      <div
+                        className="text-[#94A3B8] cursor-pointer flex items-center justify-center p-0.5 rounded hover:text-[#EF4444] hover:bg-[#FEF2F2] transition-all ml-auto sm:ml-0"
+                        onClick={() => handleDeleteFeature(f.id)}
+                      >
+                        <FiX size={14} />
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -1069,16 +1071,17 @@ function SubscriptionPackages() {
 
             <div className="p-4 px-6 border-t border-[#F1F5F9] flex items-center justify-between bg-[#FCFDFE]">
               <button
-                className="bg-transparent border-none text-[#62748E] font-['General_Sans',sans-serif] font-semibold text-xs cursor-pointer py-2 px-4 rounded-lg hover:text-[#0F172B] hover:bg-[#F1F5F9] transition-all"
+                className="bg-transparent border-none text-[#62748E] font-['General_Sans',sans-serif] font-semibold text-sm cursor-pointer py-2 px-4 rounded-lg hover:text-[#0F172B] hover:bg-[#F1F5F9] transition-all"
                 onClick={handleCloseEdit}
               >
-                Discard
+                Cancel
               </button>
               <button
-                className="bg-[#4F39F6] hover:bg-[#3B2AE0] text-white font-['General_Sans',sans-serif] font-semibold text-xs border-none rounded-lg py-2.5 px-5 cursor-pointer transition-all"
+                className="bg-[#4F39F6] w-[120.11px] h-[36px] rounded-xl flex items-center justify-center border-none text-white font-['General_Sans',sans-serif] font-bold text-sm leading-5 text-center cursor-pointer transition-all disabled:opacity-40 enabled:opacity-100 enabled:hover:bg-[#3B2AE0] disabled:cursor-not-allowed"
                 onClick={handleSaveEdit}
+                disabled={!editForm.name}
               >
-                Save Plan
+                Save Changes
               </button>
             </div>
           </div>

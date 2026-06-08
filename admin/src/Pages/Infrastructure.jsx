@@ -94,10 +94,10 @@ const Infrastructure = () => {
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white border border-[#E2E8F0] rounded-[24px] px-5 pt-8 pb-5 shadow-sm"
+        className="bg-white border border-[#E2E8F0] rounded-[24px] px-5 pt-8 pb-5 shadow-sm min-w-0"
       >
         {/* HEADER */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           <div>
             <h2
               style={{ fontFamily: "ClashDisplay" }}
@@ -116,15 +116,15 @@ const Infrastructure = () => {
 
           <div
             style={{ fontFamily: "GeneralSans" }}
-            className="px-3 py-1 rounded-lg bg-green-50 text-green-600 text-[12px] font-semibold"
+            className="px-3 py-1 rounded-lg bg-green-50 text-green-600 text-[12px] font-semibold shrink-0"
           >
             Realtime
           </div>
         </div>
 
         {/* CHART */}
-        <div className="h-[260px] mt-6">
-          <ResponsiveContainer width="100%" height="100%">
+        <div className="h-[260px] mt-6 min-w-0">
+          <ResponsiveContainer width="100%" height="100%" minWidth={0}>
             <AreaChart
               data={latencyData}
               margin={{

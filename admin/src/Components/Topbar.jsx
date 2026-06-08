@@ -73,13 +73,13 @@ const Topbar = () => {
   };
 
   return (
-    <div className="w-full h-[60px] bg-white border-b border-slate-100 px-8 flex items-center justify-end gap-6 shrink-0 relative z-40">
+    <div className="w-full h-[60px] bg-white border-b border-slate-100 pl-14 pr-4 md:px-8 flex items-center justify-between md:justify-end gap-3 md:gap-6 shrink-0 relative z-40">
       
       {/* Search Section */}
-      <div className="relative w-80" ref={searchRef}>
+      <div className="relative flex-1 max-w-[140px] sm:max-w-[280px] md:w-80 md:flex-none" ref={searchRef}>
         <div 
           onClick={() => searchRef.current?.querySelector("input")?.focus()}
-          className={`w-full h-11 rounded-xl bg-slate-50 border flex items-center gap-3 px-4 cursor-text transition-all duration-300 ${
+          className={`w-full h-10 md:h-11 rounded-xl bg-slate-50 border flex items-center gap-2 md:gap-3 px-3 md:px-4 cursor-text transition-all duration-300 ${
             searchFocused 
               ? "bg-white border-indigo-500 ring-4 ring-indigo-500/10 shadow-sm" 
               : "border-transparent hover:bg-slate-100/80"
@@ -139,13 +139,13 @@ const Topbar = () => {
       </div>
 
       {/* Actions Section */}
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-3 md:gap-5">
         
         {/* Notification Bell */}
         <div className="relative" ref={notificationRef}>
           <button
             onClick={() => setShowNotifications(!showNotifications)}
-            className={`w-11 h-11 rounded-xl flex items-center justify-center relative cursor-pointer border transition-all duration-300 shadow-[0_2px_8px_rgba(0,0,0,0.02)] ${
+            className={`w-10 h-10 md:w-11 md:h-11 rounded-xl flex items-center justify-center relative cursor-pointer border transition-all duration-300 shadow-[0_2px_8px_rgba(0,0,0,0.02)] ${
               showNotifications 
                 ? "bg-indigo-50 border-indigo-200 text-indigo-600" 
                 : "bg-white border-slate-100 hover:bg-slate-50 text-slate-500"
@@ -165,7 +165,7 @@ const Topbar = () => {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
                 transition={{ duration: 0.15 }}
-                className="absolute right-0 mt-2 w-80 bg-white border border-slate-100 rounded-2xl shadow-xl overflow-hidden z-50"
+                className="absolute right-[-48px] sm:right-0 mt-2 w-[calc(100vw-32px)] sm:w-80 bg-white border border-slate-100 rounded-2xl shadow-xl overflow-hidden z-50"
               >
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -241,7 +241,7 @@ const Topbar = () => {
         <div className="relative" ref={profileRef}>
           <button
             onClick={() => setShowProfile(!showProfile)}
-            className="w-11 h-11 rounded-full cursor-pointer relative border-2 border-white ring-2 ring-slate-100 hover:ring-indigo-200 transition-all duration-300 shadow-sm flex items-center justify-center"
+            className="w-10 h-10 md:w-11 md:h-11 rounded-full cursor-pointer relative border-2 border-white ring-2 ring-slate-100 hover:ring-indigo-200 transition-all duration-300 shadow-sm flex items-center justify-center"
           >
             <img
               src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
@@ -260,7 +260,7 @@ const Topbar = () => {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
                 transition={{ duration: 0.15 }}
-                className="absolute right-0 mt-2 w-72 bg-white border border-slate-100 rounded-2xl shadow-xl overflow-hidden z-50 p-2"
+                className="absolute right-0 mt-2 w-[calc(100vw-32px)] sm:w-72 bg-white border border-slate-100 rounded-2xl shadow-xl overflow-hidden z-50 p-2"
               >
                 {/* Profile Header Info */}
                 <div className="p-3 flex items-center gap-3">

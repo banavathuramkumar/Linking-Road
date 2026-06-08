@@ -127,10 +127,10 @@ function Support() {
   };
 
   return (
-    <div className="w-full max-w-[1180px] mx-auto p-8 flex flex-col gap-6">
+    <div className="w-full max-w-[1180px] mx-auto p-4 sm:p-8 flex flex-col gap-6">
       
       {/* Header row (spans across both columns) */}
-      <div className="flex justify-between items-center w-full mb-2">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 w-full mb-2">
         <h1 className="text-[#0F172B] font-['Clash_Display',sans-serif] font-semibold text-[20px] leading-7 tracking-[0px] m-0">
           Active Support Tickets
         </h1>
@@ -199,7 +199,7 @@ function Support() {
         </div>
 
         {/* RIGHT COLUMN: Performance card & Impersonation card */}
-        <div className="w-[265px] flex flex-col gap-5">
+        <div className="w-full xl:w-[265px] flex flex-col gap-5">
           
           {/* Support Team Performance Card */}
           <div className="shadow-[0px_1px_2px_-1px_rgba(0,0,0,0.1),0px_1px_3px_0px_rgba(0,0,0,0.1)] border border-[#E2E8F0] bg-white rounded-[24px] p-6 h-[170px] flex flex-col justify-between">
@@ -237,17 +237,17 @@ function Support() {
               </p>
             </div>
 
-            <form onSubmit={handleStartImpersonation} className="flex flex-col gap-3">
+            <form onSubmit={handleStartImpersonation} className="flex flex-col gap-3 w-full">
               <input 
                 type="email" 
                 placeholder="Enter user email..."
-                className="border-[0.8px] border-[#FFFFFF33] bg-[#FFFFFF1A] w-[214.67px] h-[33.58px] rounded-xl py-2 px-4 font-['General_Sans',sans-serif] text-xs text-white focus:outline-none placeholder-gray-400 box-border"
+                className="border-[0.8px] border-[#FFFFFF33] bg-[#FFFFFF1A] w-full h-[33.58px] rounded-xl py-2 px-4 font-['General_Sans',sans-serif] text-xs text-white focus:outline-none placeholder-gray-400 box-border"
                 value={impersonationEmail}
                 onChange={(e) => setImpersonationEmail(e.target.value)}
               />
               <button 
                 type="submit" 
-                className="bg-[#4F39F6] w-[214.67px] h-[36px] gap-2 rounded-xl flex items-center justify-center font-['General_Sans',sans-serif] font-bold text-xs text-white border-none cursor-pointer hover:bg-[#3B2AE0] transition-colors"
+                className="bg-[#4F39F6] w-full h-[36px] gap-2 rounded-xl flex items-center justify-center font-['General_Sans',sans-serif] font-bold text-xs text-white border-none cursor-pointer hover:bg-[#3B2AE0] transition-colors"
               >
                 {impersonationStatus || "Start Impersonation"}
               </button>
@@ -258,7 +258,7 @@ function Support() {
 
       {/* DISCUSSION SLIDING PANEL */}
       {selectedTicket && (
-        <div className="fixed inset-y-0 right-0 w-[540px] bg-white shadow-2xl z-[1100] flex flex-col border-l border-[#E2E8F0] box-border animate-slide-in">
+        <div className="fixed inset-y-0 right-0 w-full sm:w-[540px] bg-white shadow-2xl z-[1100] flex flex-col border-l border-[#E2E8F0] box-border animate-slide-in">
           
           {/* Header */}
           <div className="p-6 border-b border-[#F1F5F9] flex items-start gap-4 justify-between">
