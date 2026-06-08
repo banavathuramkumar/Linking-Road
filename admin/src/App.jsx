@@ -9,6 +9,7 @@ import Billing from "./Pages/Billing";
 import Infrastructure from "./Pages/Infrastructure";
 import Support from "./Pages/Support";
 import AuditLogs from "./Pages/AuditLogs";
+import SubscriptionPackages from "./pages/SubscriptionPackages";
 
 function AdminLayout() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/infrastructure" element={<Infrastructure />} />
         <Route path="/support" element={<Support />} />
         <Route path="/audit-logs" element={<AuditLogs />} />
+        <Route path="/subscription-packages" element={<SubscriptionPackages />} />
       </Route>
     </Routes>
   );
