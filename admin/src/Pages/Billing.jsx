@@ -32,6 +32,12 @@ const Billing = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toast, setToast] = useState(null);
 
+  // Clickable calendar and seats states
+  const [seatsCount, setSeatsCount] = useState(5);
+  const [renewalDate, setRenewalDate] = useState("2026-07-15");
+  const [isRenewalPopupOpen, setIsRenewalPopupOpen] = useState(false);
+  const [isSeatsPopupOpen, setIsSeatsPopupOpen] = useState(false);
+
   const showToast = (message, type = "success") => {
     setToast({ message, type });
     setTimeout(() => setToast(null), 4000);
@@ -236,6 +242,8 @@ const Billing = () => {
   const handleSaveChanges = () => {
     setCurrentPlan(selectedPlan);
     setIsModalOpen(false);
+    setIsRenewalPopupOpen(false);
+    setIsSeatsPopupOpen(false);
     showToast("Changes saved successfully!", "success");
   };
 
@@ -287,6 +295,8 @@ const Billing = () => {
             onClick={() => {
               setSelectedPlan(currentPlan);
               setIsModalOpen(true);
+              setIsRenewalPopupOpen(false);
+              setIsSeatsPopupOpen(false);
             }}
             className="border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-600 font-semibold flex items-center gap-2 bg-white hover:bg-slate-50 transition-colors shadow-sm cursor-pointer"
           >
@@ -394,7 +404,11 @@ const Billing = () => {
                   </div>
                 </div>
                 <button
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={() => {
+                    setIsModalOpen(false);
+                    setIsRenewalPopupOpen(false);
+                    setIsSeatsPopupOpen(false);
+                  }}
                   className="text-slate-400 hover:text-slate-600 transition-colors p-1.5 hover:bg-slate-50 rounded-xl cursor-pointer"
                 >
                   <FiX className="w-5 h-5" />
@@ -404,19 +418,143 @@ const Billing = () => {
               {/* CONTENT/BODY DIV */}
               <div className="w-full p-4 flex flex-col gap-2 flex-1 bg-white overflow-y-auto">
                 {/* SECTION 1: Account status card */}
-                <div className="bg-[#F8FAFC] rounded-2xl p-3.5 flex flex-wrap items-center gap-4 border border-[#F1F5F9]">
+                <div className="bg-[#F8FAFC] rounded-2xl p-3.5 flex flex-wrap items-center gap-4 border border-[#F1F5F9] relative">
                   <span className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold text-[#10B981] bg-[#E6FDF4] rounded-full border border-[#10B981]/10">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
                     Active
                   </span>
-                  <div className="flex items-center gap-2 text-xs font-semibold text-slate-400">
+                  <div
+                    onClick={() => {
+                      setIsRenewalPopupOpen(!isRenewalPopupOpen);
+                      setIsSeatsPopupOpen(false);
+                    }}
+                    className="flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-indigo-600 cursor-pointer transition-colors select-none"
+                  >
                     <FiCalendar className="w-4 h-4 text-slate-400" />
-                    <span>Renews 2026-07-15</span>
+                    <span>Renews {renewalDate}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs font-semibold text-slate-400">
+                  <div
+                    onClick={() => {
+                      setIsSeatsPopupOpen(!isSeatsPopupOpen);
+                      setIsRenewalPopupOpen(false);
+                    }}
+                    className="flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-indigo-600 cursor-pointer transition-colors select-none"
+                  >
                     <FiUsers className="w-4 h-4 text-slate-400" />
-                    <span>5 seats</span>
+                    <span>{seatsCount} seats</span>
                   </div>
+
+                  {/* Renewal Details Dropdown */}
+                  <AnimatePresence>
+                    {isRenewalPopupOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="absolute left-0 right-0 top-full mt-2 z-20 bg-white border border-slate-100 shadow-xl rounded-2xl p-4 flex flex-col gap-3.5"
+                      >
+                        <div className="flex justify-between items-center pb-2 border-b border-slate-100">
+                          <span className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                            <FiCalendar className="w-4 h-4 text-[#6366F1]" />
+                            Renewal Details
+                          </span>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setIsRenewalPopupOpen(false);
+                            }}
+                            className="text-slate-400 hover:text-slate-600 transition-colors p-1 hover:bg-slate-50 rounded-lg cursor-pointer border-none bg-transparent outline-none"
+                          >
+                            <FiX className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                        
+                        <div className="grid grid-cols-2 gap-3.5 text-xs text-left">
+                          <div>
+                            <span className="text-slate-400 font-semibold block mb-0.5">Renewal Date</span>
+                            <span className="font-bold text-slate-800">{renewalDate}</span>
+                          </div>
+                          <div>
+                            <span className="text-slate-400 font-semibold block mb-0.5">Billing Cycle</span>
+                            <span className="font-bold text-slate-800 capitalize">{billingCycle}</span>
+                          </div>
+                          <div className="col-span-2">
+                            <span className="text-slate-400 font-semibold block mb-0.5">Next Payment Amount</span>
+                            <span className="font-bold text-[#6366F1] text-sm">
+                              {selectedPlan === "starter"
+                                ? "$0.00 (Free)"
+                                : selectedPlan === "pro"
+                                  ? (billingCycle === "monthly" ? "$49.00" : "$39.00")
+                                  : (billingCycle === "monthly" ? "$499.00" : "$399.00")}
+                            </span>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Seats Management Dropdown */}
+                  <AnimatePresence>
+                    {isSeatsPopupOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="absolute left-0 right-0 top-full mt-2 z-20 bg-white border border-slate-100 shadow-xl rounded-2xl p-4 flex flex-col gap-3.5"
+                      >
+                        <div className="flex justify-between items-center pb-2 border-b border-slate-100">
+                          <span className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                            <FiUsers className="w-4 h-4 text-[#6366F1]" />
+                            Seat Management
+                          </span>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setIsSeatsPopupOpen(false);
+                            }}
+                            className="text-slate-400 hover:text-slate-600 transition-colors p-1 hover:bg-slate-50 rounded-lg cursor-pointer border-none bg-transparent outline-none"
+                          >
+                            <FiX className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                        
+                        <div className="flex items-center justify-between gap-4 py-1.5">
+                          <div className="flex flex-col text-left">
+                            <span className="text-xs text-slate-400 font-semibold">Active Seats</span>
+                            <span className="text-lg font-extrabold text-slate-800 leading-none mt-1">
+                              {seatsCount} {seatsCount === 1 ? "seat" : "seats"}
+                            </span>
+                            <span className="text-[10px] text-slate-400 font-medium mt-1">
+                              3 used / {seatsCount} available
+                            </span>
+                          </div>
+                          
+                          <div className="flex items-center gap-2 bg-[#F1F5F9] p-1 rounded-xl border border-slate-200/20">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setSeatsCount(prev => Math.max(3, prev - 1));
+                              }}
+                              disabled={seatsCount <= 3}
+                              className="w-8 h-8 rounded-lg bg-white border border-slate-200/50 flex items-center justify-center font-bold text-slate-600 hover:bg-slate-50 hover:text-slate-800 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-colors shadow-sm"
+                            >
+                              -
+                            </button>
+                            <span className="w-8 text-center text-xs font-bold text-slate-800">{seatsCount}</span>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setSeatsCount(prev => prev + 1);
+                              }}
+                              className="w-8 h-8 rounded-lg bg-white border border-slate-200/50 flex items-center justify-center font-bold text-slate-600 hover:bg-slate-50 hover:text-slate-800 cursor-pointer transition-colors shadow-sm"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
 
                 {/* SECTION 2: Plan heading + toggle */}
@@ -637,6 +775,8 @@ const Billing = () => {
                     onClick={() => {
                       setSelectedPlan(currentPlan);
                       setIsModalOpen(false);
+                      setIsRenewalPopupOpen(false);
+                      setIsSeatsPopupOpen(false);
                     }}
                     className="text-slate-500 hover:text-slate-700 font-bold text-sm cursor-pointer"
                   >
