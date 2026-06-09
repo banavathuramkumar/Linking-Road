@@ -18,6 +18,7 @@ import Settings from "./pages/Settings";
 import Inbox from "./pages/Inbox";
 import Analytics from "./pages/Analytics";
 import AIChatAssistant from "./components/AIChatAssistant";
+import Notifications from "./pages/Notifications";
 
 
 const App = () => {
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="/templates" element={<Templates />} />
         <Route path="/inbox" element={<Inbox />} />
         <Route path="/analytics" element={<Analytics />} />
+        <Route path="/notifications" element={<Notifications />} />
       </Routes>
       <AIChatAssistant />
     </div>

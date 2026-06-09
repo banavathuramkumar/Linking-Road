@@ -27,6 +27,7 @@ const Sidebar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
     { name: "Referrals", icon: HiOutlineGift, path: "/referrals" },
     { name: "Billing", icon: HiOutlineCreditCard, path: "/billing" },
     { name: "Settings", icon: HiOutlineCog, path: "/settings" },
+    { name: "Notifications", icon: HiOutlineCog, path: "/notifications" },
   ];
 
   // Helper to determine if a link is active based on the current location
